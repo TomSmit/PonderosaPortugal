@@ -1,0 +1,34 @@
+id: passadicos
+volgorde: 140
+lat: 40.52622
+lon: -7.34536
+hoofdplek: false
+nl:
+  naam: Passadiços do Mondego
+  onder: Miradouro do Alto Mondego
+  tekst: |-
+    Langs de rivier lopen de Passadiços do Mondego: zo'n 12 kilometer houten paden en hangbruggen, van de dam van het Caldeirão tot Videmonte.
+
+    Vanaf dit uitkijkpunt zie je de bocht van de rivier. Soms lopen we een stuk van de route, en wie wil kan een keer helemaal tot Videmonte.
+  nog_schrijven: false
+pt:
+  naam: Passadiços do Mondego
+  onder: Miradouro do Alto Mondego
+  tekst: |-
+    Ao longo do rio seguem os Passadiços do Mondego: cerca de 12 quilómetros de passadiços e pontes suspensas, da Barragem do Caldeirão até Videmonte.
+
+    Deste miradouro vê-se a curva do rio. Às vezes fazemos um troço do percurso, e quem quiser pode um dia ir a pé até Videmonte.
+  nog_schrijven: false
+en:
+  naam: Passadiços do Mondego
+  onder: Miradouro do Alto Mondego
+  tekst: |-
+    Along the river run the Passadiços do Mondego: some 12 kilometres of wooden walkways and suspension bridges, from the Caldeirão dam to Videmonte.
+
+    From this viewpoint you can see the bend of the river. Sometimes we walk part of the route, and if you like you can go all the way to Videmonte one day.
+  nog_schrijven: false
+fotos:
+- bestand: /fotos/passadicos/trappen.jpg
+  nl: Trappen van de Passadiços
+  pt: Escadas dos Passadiços
+  en: Steps on the Passadiços

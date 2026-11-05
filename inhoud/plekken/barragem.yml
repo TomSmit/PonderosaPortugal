@@ -1,0 +1,30 @@
+id: barragem
+volgorde: 200
+lat: 40.5317
+lon: -7.3299
+hoofdplek: false
+nl:
+  naam: Barragem do Caldeirão
+  onder: Stuwmeer en dam
+  tekst: |-
+    In het oosten ligt het stuwmeer van het Caldeirão, met de dam aan de noordkant. Vlak bij de dam valt de Cascata do Caldeirão.
+
+    Bij de dam begint de wandelroute langs de Mondego.
+  nog_schrijven: false
+pt:
+  naam: Barragem do Caldeirão
+  onder: Albufeira e barragem
+  tekst: |-
+    A nascente fica a albufeira do Caldeirão, com a barragem no lado norte. Junto à barragem fica a Cascata do Caldeirão.
+
+    É junto à barragem que começa o percurso ao longo do Mondego.
+  nog_schrijven: false
+en:
+  naam: Barragem do Caldeirão
+  onder: Reservoir and dam
+  tekst: |-
+    To the east lies the Caldeirão reservoir, with the dam at its northern end. Close to the dam is the Cascata do Caldeirão.
+
+    The walking route along the Mondego starts at the dam.
+  nog_schrijven: false
+fotos: []

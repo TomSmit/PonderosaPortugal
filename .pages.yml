@@ -1,0 +1,302 @@
+# Instellingen voor het beheerscherm (Pages CMS, app.pagescms.org).
+# Hier staat welke teksten en foto's collega's kunnen aanpassen, en hoe de invulvelden eruitzien.
+
+media:
+  input: fotos
+  output: /fotos
+  rename: safe
+  categories: [image]
+
+content:
+  # ------------------------------------------------------------------ plekken
+  - name: plekken
+    label: Plekken op de kaart
+    type: collection
+    path: inhoud/plekken
+    format: yaml
+    filename: "{primary}.yml"
+    view:
+      fields: [id, volgorde]
+      primary: id
+      sort: [volgorde]
+      default:
+        sort: volgorde
+        order: asc
+    fields:
+      - name: id
+        label: Korte naam (webadres)
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+        description: "Alleen kleine letters, cijfers en streepjes, bijvoorbeeld 'bakker'. Wordt het adres op de kaart (#bakker). Niet meer veranderen als de plek eenmaal online staat."
+      - name: volgorde
+        label: Volgorde
+        type: number
+        description: "Bepaalt de volgorde bij de knoppen 'vorige' en 'volgende plek'."
+      - name: lat
+        label: Breedtegraad
+        type: number
+        required: true
+        description: "Bijvoorbeeld 40.51375. In Google Maps: rechtsklik op de plek, het eerste getal."
+      - name: lon
+        label: Lengtegraad
+        type: number
+        required: true
+        description: "Bijvoorbeeld -7.35215. In Google Maps het tweede getal, met het minteken."
+      - name: hoofdplek
+        label: Grote gele vlag (alleen voor de quinta)
+        type: boolean
+      - name: nl
+        label: Nederlands
+        type: object
+        fields: &plektekst
+          - name: naam
+            label: Naam
+            type: string
+            required: true
+          - name: onder
+            label: Ondertitel
+            type: string
+          - name: tekst
+            label: Verhaal
+            type: text
+            description: "Laat een witregel tussen twee alinea's."
+          - name: nog_schrijven
+            label: Het verhaal volgt nog
+            type: boolean
+            description: "Aangevinkt: de bezoeker ziet dat het verhaal nog volgt. Haal het vinkje weg als de tekst af is."
+      - name: pt
+        label: Português
+        type: object
+        fields: *plektekst
+      - name: en
+        label: English
+        type: object
+        fields: *plektekst
+      - name: fotos
+        label: Foto's
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{nl}"
+        description: "Alleen foto's waarvoor de mensen die erop staan toestemming hebben gegeven. De site maakt ze zelf kleiner."
+        fields:
+          - name: bestand
+            label: Foto
+            type: image
+          - name: nl
+            label: Bijschrift (Nederlands)
+            type: string
+          - name: pt
+            label: Legenda (português)
+            type: string
+          - name: en
+            label: Caption (English)
+            type: string
+
+  # ------------------------------------------------------------------ per taal
+  - name: nederlands
+    label: Nederlands
+    type: group
+    items:
+      - name: paginas_nl
+        label: Pagina's
+        type: collection
+        path: inhoud/nl/paginas
+        format: yaml-frontmatter
+        view: &paginaview
+          fields: [titel, volgorde]
+          primary: titel
+          default:
+            sort: volgorde
+            order: asc
+        fields: &paginavelden
+          - name: titel
+            label: Titel
+            type: string
+            required: true
+          - name: boventitel
+            label: Klein kopje boven de titel
+            type: string
+          - name: menu
+            label: Naam in het menu
+            type: string
+            required: true
+          - name: intro
+            label: Intro (groene tekst bovenaan)
+            type: text
+          - name: feiten
+            label: Feitjes in het gele blok
+            type: object
+            list: true
+            fields:
+              - name: wat
+                label: Wat
+                type: string
+              - name: waarde
+                label: Waarde
+                type: string
+          - name: body
+            label: Tekst
+            type: rich-text
+            options:
+              format: markdown
+              media: false
+            description: "Een citaat zet je als quote. De laatste regel van een quote wordt de naam van de schrijver."
+          - name: vragen
+            label: Vragen en antwoorden
+            type: object
+            list: true
+            fields:
+              - name: vraag
+                label: Vraag
+                type: string
+              - name: antwoord
+                label: Antwoord
+                type: text
+          - name: volgorde
+            label: Volgorde in het menu
+            type: number
+          - name: adres
+            label: Webadres
+            type: string
+            readonly: true
+          - name: pagina
+            type: string
+            hidden: true
+          - name: contactgegevens
+            type: boolean
+            hidden: true
+          - name: aanmeldformulier
+            type: boolean
+            hidden: true
+      - name: kaart_nl
+        label: Teksten op de kaart
+        type: file
+        path: inhoud/nl/kaart.yml
+        format: yaml
+        fields: &kaartvelden
+          - name: titel
+            label: Titel
+            type: string
+          - name: ondertitel
+            label: Zin onder de titel
+            type: text
+          - name: knop
+            label: Tekst op de gele knop
+            type: string
+          - name: kaartlabel
+            label: Beschrijving van de kaart voor schermlezers
+            type: string
+          - name: teksten
+            label: Kleine teksten
+            type: object
+            fields:
+              - { name: loading, label: Tijdens het laden, type: string }
+              - { name: home, label: Knop overzicht, type: string }
+              - { name: north, label: Kompas, type: string }
+              - { name: close, label: Sluiten, type: string }
+              - { name: sources, label: Bronnen, type: string }
+              - { name: credit, label: Bronvermelding (niet aanpassen), type: string, readonly: true }
+              - { name: hint, label: Uitleg bediening, type: string }
+              - { name: places, label: Alle plekken, type: string }
+              - { name: nogl, label: Als de 3D-kaart niet werkt, type: string }
+              - { name: todo, label: Verhaal volgt nog, type: string }
+              - { name: next, label: Volgende plek, type: string }
+              - { name: prev, label: Vorige plek, type: string }
+              - { name: height, label: Hoogte, type: string }
+          - name: plaatsnamen
+            label: Plaatsnamen op de kaart
+            type: object
+            fields:
+              - { name: corujeira, label: Corujeira, type: string }
+              - { name: meios, label: Meios, type: string }
+              - { name: mondego, label: Rivier, type: string }
+              - { name: albufeira, label: Stuwmeer, type: string }
+      - name: algemeen_nl
+        label: Contact en formulier
+        type: file
+        path: inhoud/nl/algemeen.yml
+        format: yaml
+        fields: &algemeenvelden
+          - { name: naar_kaart, label: Knop naar de kaart, type: string }
+          - { name: lees_verder, label: Lees verder, type: string }
+          - { name: menu, label: Menu, type: string }
+          - name: contact
+            label: Contactgegevens
+            type: object
+            fields:
+              - { name: bellen, label: Kopje telefoon, type: string }
+              - { name: telefoon, label: Telefoonnummer, type: string }
+              - { name: email, label: Kopje e-mail, type: string }
+              - { name: info, label: Algemeen e-mailadres, type: string }
+              - { name: info_uitleg, label: Uitleg algemeen adres, type: string }
+              - { name: aanmelden, label: E-mailadres aanmelden, type: string }
+              - { name: aanmelden_uitleg, label: Uitleg aanmeldadres, type: string }
+              - { name: zomergroep, label: Kopje zomergroep, type: string }
+              - { name: zomergroep_tekst, label: Tekst zomergroep, type: string }
+          - name: formulier
+            label: Aanmeldformulier
+            type: object
+            fields:
+              - { name: titel, label: Titel, type: string }
+              - { name: naam, label: Veld naam, type: string }
+              - { name: rol, label: Veld rol, type: string }
+              - { name: rollen, label: Keuzes bij rol, type: string, list: true }
+              - { name: email, label: Veld e-mail, type: string }
+              - { name: telefoon, label: Veld telefoon, type: string }
+              - { name: gemeente, label: Veld gemeente, type: string }
+              - { name: leeftijd, label: Veld leeftijd, type: string }
+              - { name: waarom, label: Veld waarom, type: string }
+              - { name: versturen, label: Knop versturen, type: string }
+              - { name: privacy, label: Privacyzin, type: text }
+              - { name: verstuurd, label: Melding na versturen, type: string }
+
+  - name: portugues
+    label: Português
+    type: group
+    items:
+      - name: paginas_pt
+        label: Páginas
+        type: collection
+        path: inhoud/pt/paginas
+        format: yaml-frontmatter
+        view: *paginaview
+        fields: *paginavelden
+      - name: kaart_pt
+        label: Textos no mapa
+        type: file
+        path: inhoud/pt/kaart.yml
+        format: yaml
+        fields: *kaartvelden
+      - name: algemeen_pt
+        label: Contacto e formulário
+        type: file
+        path: inhoud/pt/algemeen.yml
+        format: yaml
+        fields: *algemeenvelden
+
+  - name: english
+    label: English
+    type: group
+    items:
+      - name: paginas_en
+        label: Pages
+        type: collection
+        path: inhoud/en/paginas
+        format: yaml-frontmatter
+        view: *paginaview
+        fields: *paginavelden
+      - name: kaart_en
+        label: Texts on the map
+        type: file
+        path: inhoud/en/kaart.yml
+        format: yaml
+        fields: *kaartvelden
+      - name: algemeen_en
+        label: Contact and form
+        type: file
+        path: inhoud/en/algemeen.yml
+        format: yaml
+        fields: *algemeenvelden

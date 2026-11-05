@@ -1,0 +1,21 @@
+id: bakker
+volgorde: 120
+lat: 40.503591
+lon: -7.354595
+hoofdplek: false
+nl:
+  naam: De bakker
+  onder: Trinta
+  tekst: De bakker van Trinta.
+  nog_schrijven: true
+pt:
+  naam: A padaria
+  onder: Trinta
+  tekst: A padaria de Trinta.
+  nog_schrijven: true
+en:
+  naam: The bakery
+  onder: Trinta
+  tekst: The bakery of Trinta.
+  nog_schrijven: true
+fotos: []

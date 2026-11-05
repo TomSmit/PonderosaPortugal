@@ -1,0 +1,25 @@
+id: praia
+volgorde: 220
+lat: 40.517133
+lon: -7.330304
+hoofdplek: false
+nl:
+  naam: Praia Fluvial
+  onder: Zwemplek aan het stuwmeer
+  tekst: De zwemplek aan het stuwmeer van het Caldeirão.
+  nog_schrijven: true
+pt:
+  naam: Praia Fluvial
+  onder: Zona de banhos na albufeira
+  tekst: A praia fluvial da albufeira do Caldeirão.
+  nog_schrijven: true
+en:
+  naam: Praia Fluvial
+  onder: Swimming spot at the reservoir
+  tekst: The swimming spot at the Caldeirão reservoir.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/praia/zwemplek.jpg
+  nl: Bij de zwemplek aan het stuwmeer
+  pt: Na praia fluvial da albufeira
+  en: At the swimming spot on the reservoir

@@ -1,0 +1,25 @@
+id: cafe
+volgorde: 110
+lat: 40.504509
+lon: -7.354698
+hoofdplek: false
+nl:
+  naam: Cafe Central
+  onder: Café in Trinta
+  tekst: Het café aan het plein van Trinta.
+  nog_schrijven: true
+pt:
+  naam: Cafe Central
+  onder: Café em Trinta
+  tekst: O café na praça de Trinta.
+  nog_schrijven: true
+en:
+  naam: Cafe Central
+  onder: Café in Trinta
+  tekst: The café on the square in Trinta.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/cafe/avond.jpg
+  nl: Een avond bij Cafe Central
+  pt: Uma noite no Cafe Central
+  en: An evening at Cafe Central

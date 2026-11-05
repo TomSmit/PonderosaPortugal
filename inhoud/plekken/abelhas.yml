@@ -1,0 +1,33 @@
+id: abelhas
+volgorde: 50
+lat: 40.51334105359551
+lon: -7.350743835238967
+hoofdplek: false
+nl:
+  naam: Casa de Abelhas
+  onder: Het bijenhuis
+  tekst: Het bijenhuis, vlak bij de quinta.
+  nog_schrijven: true
+pt:
+  naam: Casa de Abelhas
+  onder: A casa das abelhas
+  tekst: A casa das abelhas, perto da quinta.
+  nog_schrijven: true
+en:
+  naam: Casa de Abelhas
+  onder: The bee house
+  tekst: The bee house, close to the quinta.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/abelhas/tulpen.jpg
+  nl: Tulpen voor het bijenhuis
+  pt: Túlipas em frente à casa das abelhas
+  en: Tulips in front of the bee house
+- bestand: /fotos/abelhas/ezel.jpg
+  nl: Een nieuwsgierige ezel
+  pt: Um burro curioso
+  en: A curious donkey
+- bestand: /fotos/abelhas/twee-ezels.jpg
+  nl: Twee ezels aan het hek
+  pt: Dois burros à cerca
+  en: Two donkeys at the fence

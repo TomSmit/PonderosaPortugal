@@ -1,0 +1,57 @@
+id: theater
+volgorde: 20
+lat: 40.514346
+lon: -7.353098
+hoofdplek: false
+nl:
+  naam: Het theater
+  onder: Op de quinta
+  tekst: Het theater op de quinta, aan de bovenkant van het terrein.
+  nog_schrijven: true
+pt:
+  naam: O teatro
+  onder: Na quinta
+  tekst: O teatro da quinta, na parte de cima do terreno.
+  nog_schrijven: true
+en:
+  naam: The theatre
+  onder: At the quinta
+  tekst: The theatre at the quinta, at the top of the grounds.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/theater/spanten.jpg
+  nl: De eerste spanten staan
+  pt: As primeiras asnas estão de pé
+  en: The first roof trusses are up
+- bestand: /fotos/theater/geraamte.jpg
+  nl: Het geraamte op de helling
+  pt: A estrutura na encosta
+  en: The frame on the slope
+- bestand: /fotos/theater/dak.jpg
+  nl: Het dak gaat erop
+  pt: O telhado vai subindo
+  en: The roof goes on
+- bestand: /fotos/theater/dakspanen.jpg
+  nl: Even zitten op de dakspanen
+  pt: Uma pausa em cima das telhas de madeira
+  en: A break on the wooden shingles
+- bestand: /fotos/theater/strobalen.jpg
+  nl: Strobalen tussen de palen
+  pt: Fardos de palha entre os postes
+  en: Straw bales between the posts
+- bestand: /fotos/theater/stro-stapelen.jpg
+  nl: Muren van stro
+  pt: Paredes de palha
+  en: Walls of straw
+- bestand: /fotos/theater/leem.jpg
+  nl: Leem op de strowand
+  pt: Barro sobre a parede de palha
+  en: Clay on the straw wall
+- bestand: /fotos/theater/beschilderde-wand.jpg
+  nl: De beschilderde wand onder het lichtdak
+  pt: A parede pintada debaixo da claraboia
+  en: The painted wall under the skylight
+- bestand: /fotos/theater/klaar.jpg
+  nl: Het theater is klaar
+  pt: O teatro está pronto
+  en: The theatre is finished

@@ -3,20 +3,18 @@
 De website van het zomertraject op Quinta Dionisio, bij Trinta in de vallei van de Mondego.
 Hoofdadres: ponderosaportugal.nl. De site is er in het Nederlands, Portugees en Engels.
 
-## Teksten aanpassen
+## Teksten en foto's aanpassen
 
-Alle teksten staan in de map `inhoud/`, per taal een eigen map (`nl`, `pt`, `en`).
+De makkelijkste manier is het beheerscherm op app.pagescms.org. Daar zie je invulvelden in plaats van bestanden. Wie geen GitHub-account heeft, kan per e-mail worden uitgenodigd.
 
-* `paginas/` bevat de pagina's, zoals `1-zes-weken.md`. Bovenin staan tussen twee regels `---` de titel, de intro en eventueel de feitjes of vragen. Daaronder staat de gewone tekst. Een regel die met `## ` begint, wordt een tussenkopje. Een witregel begint een nieuwe alinea.
-* `plekken.yml` bevat het verhaal van elke plek op de kaart. Elke regel onder `tekst:` is een alinea.
-* `kaart.yml` bevat de titel, de zin eronder en de knop op de kaart.
-* `algemeen.yml` bevat losse teksten, zoals de contactgegevens en het aanmeldformulier.
+Wie liever in de bestanden zelf werkt:
 
-Het getal voor de bestandsnaam van een pagina bepaalt alleen de volgorde in de map. De volgorde op de site komt uit `volgorde:` bovenin het bestand. Het webadres van een pagina staat bij `adres:`. Verander dat liever niet meer als de site eenmaal online staat.
+* `inhoud/plekken/` bevat per plek op de kaart één bestand, met de ligging, het verhaal in drie talen en de foto's met hun bijschriften. In het verhaal begint een witregel een nieuwe alinea.
+* `inhoud/nl/paginas/` (en `pt`, `en`) bevat de pagina's. Bovenin staan tussen twee regels `---` de titel, de intro en eventueel de feitjes of vragen. Daaronder staat de gewone tekst. Een regel die met `## ` begint, wordt een tussenkopje.
+* `inhoud/nl/kaart.yml` bevat de titel, de zin eronder en de knop op de kaart.
+* `inhoud/nl/algemeen.yml` bevat losse teksten, zoals de contactgegevens en het aanmeldformulier.
 
-## Foto's
-
-Foto's per plek staan in `fotos/<plek>/` en worden genoemd in `inhoud/plekken.yml`. Zie `fotos/LEESMIJ.md`.
+Foto's staan in `fotos/`. De site maakt ze bij het bouwen zelf kleiner en haalt de verborgen gegevens eruit, zoals de GPS-locatie. Het origineel staat wel in deze openbare repository, dus zet hier alleen foto's waarvoor toestemming is.
 
 ## Hoe het online komt
 

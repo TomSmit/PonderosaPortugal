@@ -1,0 +1,29 @@
+id: mirjam
+volgorde: 30
+lat: 40.513407
+lon: -7.351765
+hoofdplek: false
+nl:
+  naam: Het huis van Mirjam
+  onder: Op de quinta
+  tekst: Hier woont Mirjam, op de quinta.
+  nog_schrijven: true
+pt:
+  naam: A casa da Mirjam
+  onder: Na quinta
+  tekst: Aqui vive a Mirjam, na quinta.
+  nog_schrijven: true
+en:
+  naam: Mirjam's house
+  onder: At the quinta
+  tekst: Mirjam lives here, at the quinta.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/mirjam/uitzicht-dak.jpg
+  nl: Uitzicht over het dak van Mirjams huis
+  pt: Vista sobre o telhado da casa da Mirjam
+  en: The view over the roof of Mirjam's house
+- bestand: /fotos/mirjam/ezel-bij-huis.jpg
+  nl: Een ezel bij het huis van Mirjam
+  pt: Um burro junto à casa da Mirjam
+  en: A donkey by Mirjam's house

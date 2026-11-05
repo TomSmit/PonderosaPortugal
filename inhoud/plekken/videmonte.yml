@@ -1,0 +1,34 @@
+id: videmonte
+volgorde: 90
+lat: 40.51499
+lon: -7.39319
+hoofdplek: false
+nl:
+  naam: Videmonte
+  onder: Het dorp aan het eind van de route
+  tekst: |-
+    In het westen ligt Videmonte, op de helling boven de rivier.
+
+    Hier eindigen de Passadiços do Mondego. Wie de hele route loopt, komt hier na zo'n 12 kilometer aan.
+  nog_schrijven: false
+pt:
+  naam: Videmonte
+  onder: A aldeia no fim do percurso
+  tekst: |-
+    A poente fica Videmonte, na encosta sobre o rio.
+
+    É aqui que terminam os Passadiços do Mondego. Quem faz o percurso inteiro chega aqui ao fim de cerca de 12 quilómetros.
+  nog_schrijven: false
+en:
+  naam: Videmonte
+  onder: The village at the end of the route
+  tekst: |-
+    To the west lies Videmonte, on the slope above the river.
+
+    The Passadiços do Mondego end here. Walk the whole route and you arrive after about 12 kilometres.
+  nog_schrijven: false
+fotos:
+- bestand: /fotos/videmonte/straathoek.jpg
+  nl: Een straathoek in Videmonte
+  pt: Uma esquina em Videmonte
+  en: A street corner in Videmonte

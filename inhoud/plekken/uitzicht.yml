@@ -1,0 +1,37 @@
+id: uitzicht
+volgorde: 150
+lat: 40.51882251802335
+lon: -7.341691169709344
+hoofdplek: false
+nl:
+  naam: Het uitzichtpunt
+  onder: Uitzicht over de vallei
+  tekst: Een uitzichtpunt ten noordoosten van de quinta.
+  nog_schrijven: true
+pt:
+  naam: O miradouro
+  onder: Vista sobre o vale
+  tekst: Um miradouro a nordeste da quinta.
+  nog_schrijven: true
+en:
+  naam: The viewpoint
+  onder: A view over the valley
+  tekst: A viewpoint north-east of the quinta.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/uitzicht/windmolens.jpg
+  nl: Windmolens op de bergkam
+  pt: Aerogeradores na serra
+  en: Wind turbines on the ridge
+- bestand: /fotos/uitzicht/vallei.jpg
+  nl: Uitzicht over de vallei
+  pt: Vista sobre o vale
+  en: A view over the valley
+- bestand: /fotos/uitzicht/baloicos.jpg
+  nl: Schommelen bij de Baloiços da Rapa
+  pt: Nos Baloiços da Rapa
+  en: On the swings at Baloiços da Rapa
+- bestand: /fotos/uitzicht/zwerfkei.jpg
+  nl: Bij de grote zwerfkei
+  pt: Junto ao grande penedo
+  en: By the big boulder

@@ -1,0 +1,21 @@
+id: bar
+volgorde: 210
+lat: 40.516424
+lon: -7.330038
+hoofdplek: false
+nl:
+  naam: De bar bij het stuwmeer
+  onder: Aan het Caldeirão
+  tekst: Aan de oever van het stuwmeer, vlak bij de zwemplek.
+  nog_schrijven: true
+pt:
+  naam: O bar da albufeira
+  onder: Junto ao Caldeirão
+  tekst: Na margem da albufeira, perto da praia fluvial.
+  nog_schrijven: true
+en:
+  naam: The bar by the reservoir
+  onder: At the Caldeirão
+  tekst: On the shore of the reservoir, close to the swimming spot.
+  nog_schrijven: true
+fotos: []

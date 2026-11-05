@@ -1,0 +1,29 @@
+id: buitenkeuken
+volgorde: 40
+lat: 40.513307
+lon: -7.351667
+hoofdplek: false
+nl:
+  naam: De buitenkeuken
+  onder: Op de quinta
+  tekst: De buitenkeuken op de quinta, waar de groep samen kookt.
+  nog_schrijven: true
+pt:
+  naam: A cozinha exterior
+  onder: Na quinta
+  tekst: A cozinha exterior da quinta, onde o grupo cozinha em conjunto.
+  nog_schrijven: true
+en:
+  naam: The outdoor kitchen
+  onder: At the quinta
+  tekst: The outdoor kitchen at the quinta, where the group cooks together.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/buitenkeuken/avondeten.jpg
+  nl: Avondeten in de buitenkeuken
+  pt: Jantar na cozinha exterior
+  en: Dinner in the outdoor kitchen
+- bestand: /fotos/buitenkeuken/lunch.jpg
+  nl: Lunch aan de lange tafel
+  pt: Almoço à mesa comprida
+  en: Lunch at the long table

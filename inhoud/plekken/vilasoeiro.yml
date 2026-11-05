@@ -1,0 +1,30 @@
+id: vilasoeiro
+volgorde: 170
+lat: 40.53961
+lon: -7.34286
+hoofdplek: false
+nl:
+  naam: Vila Soeiro
+  onder: Dorp aan de Mondego
+  tekst: |-
+    Een klein dorp aan de rivier, ten noorden van de quinta.
+
+    Hier is een tussenentree van de Passadiços do Mondego. Vlakbij liggen de resten van oude fabrieken die op het water van de rivier draaiden.
+  nog_schrijven: false
+pt:
+  naam: Vila Soeiro
+  onder: Aldeia junto ao Mondego
+  tekst: |-
+    Uma pequena aldeia junto ao rio, a norte da quinta.
+
+    Aqui há uma entrada intermédia dos Passadiços do Mondego. Perto ficam as ruínas de antigas fábricas movidas pela água do rio.
+  nog_schrijven: false
+en:
+  naam: Vila Soeiro
+  onder: Village on the Mondego
+  tekst: |-
+    A small village by the river, north of the quinta.
+
+    There is an intermediate entrance to the Passadiços do Mondego here. Nearby are the remains of old factories that ran on the river's water.
+  nog_schrijven: false
+fotos: []

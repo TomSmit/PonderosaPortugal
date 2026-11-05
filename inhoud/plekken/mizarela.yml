@@ -1,0 +1,21 @@
+id: mizarela
+volgorde: 180
+lat: 40.54041
+lon: -7.33784
+hoofdplek: false
+nl:
+  naam: Ponte da Mizarela
+  onder: Middeleeuwse brug
+  tekst: Een middeleeuwse brug over de Mondego, bij Vila Soeiro. De Passadiços do Mondego komen erlangs.
+  nog_schrijven: false
+pt:
+  naam: Ponte da Mizarela
+  onder: Ponte medieval
+  tekst: Uma ponte medieval sobre o Mondego, perto de Vila Soeiro. Os Passadiços do Mondego passam por aqui.
+  nog_schrijven: false
+en:
+  naam: Ponte da Mizarela
+  onder: Medieval bridge
+  tekst: A medieval bridge over the Mondego, near Vila Soeiro. The Passadiços do Mondego pass by it.
+  nog_schrijven: false
+fotos: []

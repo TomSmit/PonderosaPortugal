@@ -76,7 +76,36 @@ def naar_root(rel_map):
 inst = lees_yaml(os.path.join(HIER, "instellingen.yml"))
 ADRES = inst.get("adres", "").rstrip("/")
 LIVE = bool(inst.get("live", False))
-punten = lees_yaml(os.path.join(HIER, "inhoud", "plekken.yml"))
+# Elke plek op de kaart heeft een eigen bestand in inhoud/plekken/, met alle talen en foto's bij elkaar.
+PLEKMAP = os.path.join(HIER, "inhoud", "plekken")
+plekken_bron = []
+for f in sorted(os.listdir(PLEKMAP)):
+    if f.endswith((".yml", ".yaml")):
+        p = lees_yaml(os.path.join(PLEKMAP, f))
+        p.setdefault("id", os.path.splitext(f)[0])
+        p["_bestand"] = "inhoud/plekken/" + f
+        plekken_bron.append(p)
+plekken_bron.sort(key=lambda p: (p.get("volgorde", 999), p["id"]))
+punten = [{"id": p["id"], "lat": p["lat"], "lon": p["lon"], "hoofdplek": bool(p.get("hoofdplek"))} for p in plekken_bron]
+
+FOTO_EXT = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif")
+
+def foto_pad(bestand):
+    """Maakt van wat het beheerscherm opslaat ('/fotos/x.jpg', 'fotos/x.jpg' of 'x.jpg') een pad binnen fotos/."""
+    b = str(bestand or "").strip().lstrip("/")
+    if b.startswith("fotos/"):
+        b = b[len("fotos/"):]
+    return b
+
+def foto_uit(b):
+    """Naam van de foto op de site: HEIC wordt JPG."""
+    stam, ext = os.path.splitext(b)
+    return stam + ".jpg" if ext.lower() in (".heic", ".heif") else b
+
+def alineas(t):
+    if isinstance(t, list):
+        return [str(x).strip() for x in t if str(x).strip()]
+    return [a.strip() for a in re.split(r"\n\s*\n", str(t or "")) if a.strip()]
 
 T = {}
 for L in TALEN:
@@ -85,7 +114,6 @@ for L in TALEN:
     paginas.sort(key=lambda p: p.get("volgorde", 99))
     T[L] = {"algemeen": lees_yaml(os.path.join(d, "algemeen.yml")),
             "kaart": lees_yaml(os.path.join(d, "kaart.yml")),
-            "plekken": lees_yaml(os.path.join(d, "plekken.yml")),
             "paginas": paginas}
 
 def pagina_map(L, p=None):
@@ -142,20 +170,22 @@ def bouw_kaart(L):
     varianten = {t: pagina_map(t) for t in TALEN}
     eerste = T[L]["paginas"][0]
     plekken = {}
-    for pt in punten:
-        tekst = T[L]["plekken"].get(pt["id"])
-        if not tekst:
-            waarschuwingen.append(f"inhoud/{L}/plekken.yml: geen tekst voor plek '{pt['id']}'")
-            tekst = {"naam": pt["id"], "onder": "", "tekst": []}
+    for pt in plekken_bron:
+        tekst = pt.get(L) or {}
+        if not tekst.get("naam"):
+            waarschuwingen.append(f"{pt['_bestand']}: geen naam in het {L.upper()}")
+            tekst = dict(pt.get("nl") or {}, naam=(pt.get("nl") or {}).get("naam") or pt["id"])
         fotos = []
         for f in pt.get("fotos") or []:
-            bestand = f.get("bestand", "")
-            if not os.path.exists(os.path.join(HIER, "fotos", bestand)):
-                waarschuwingen.append(f"inhoud/plekken.yml: foto fotos/{bestand} bestaat niet")
+            b = foto_pad(f.get("bestand"))
+            if not b:
                 continue
-            fotos.append({"src": "fotos/" + bestand, "tekst": f.get(L) or f.get("nl") or ""})
+            if not os.path.exists(os.path.join(HIER, "fotos", b)):
+                waarschuwingen.append(f"{pt['_bestand']}: foto fotos/{b} bestaat niet")
+                continue
+            fotos.append({"src": "fotos/" + foto_uit(b), "tekst": f.get(L) or f.get("nl") or ""})
         plekken[pt["id"]] = {"name": tekst.get("naam", ""), "sub": tekst.get("onder", ""),
-                             "tekst": tekst.get("tekst") or [], "nog_schrijven": bool(tekst.get("nog_schrijven")),
+                             "tekst": alineas(tekst.get("tekst")), "nog_schrijven": bool(tekst.get("nog_schrijven")),
                              "fotos": fotos}
     data = {"titel": K["titel"], "ondertitel": K["ondertitel"], "teksten": K["teksten"],
             "plaatsnamen": K["plaatsnamen"], "plekken": plekken}
@@ -317,9 +347,43 @@ if os.path.isdir(UIT):
     shutil.rmtree(UIT)
 os.makedirs(UIT)
 shutil.copytree(os.path.join(HIER, "static"), os.path.join(UIT, "assets"))
-if os.path.isdir(os.path.join(HIER, "fotos")):
-    shutil.copytree(os.path.join(HIER, "fotos"), os.path.join(UIT, "fotos"),
-                    ignore=shutil.ignore_patterns("LEESMIJ*", ".*"))
+# Foto's: verkleinen tot maximaal 1400 pixels en de verborgen gegevens (zoals GPS) eruit halen.
+def verwerk_fotos():
+    bron = os.path.join(HIER, "fotos")
+    if not os.path.isdir(bron):
+        return
+    try:
+        from PIL import Image, ImageOps
+    except ImportError:
+        waarschuwingen.append("Pillow ontbreekt: foto's zijn ongewijzigd gekopieerd")
+        shutil.copytree(bron, os.path.join(UIT, "fotos"), ignore=shutil.ignore_patterns("LEESMIJ*", ".*"))
+        return
+    try:
+        import pillow_heif
+        pillow_heif.register_heif_opener()
+    except ImportError:
+        pass
+    for map_, _, bestanden in os.walk(bron):
+        for f in bestanden:
+            if f.startswith(".") or f.startswith("LEESMIJ"):
+                continue
+            rel = os.path.relpath(os.path.join(map_, f), bron).replace(os.sep, "/")
+            doel = os.path.join(UIT, "fotos", foto_uit(rel))
+            os.makedirs(os.path.dirname(doel), exist_ok=True)
+            if not f.lower().endswith(FOTO_EXT):
+                shutil.copy2(os.path.join(map_, f), doel)
+                continue
+            try:
+                im = ImageOps.exif_transpose(Image.open(os.path.join(map_, f)))
+                im.thumbnail((1400, 1400), Image.LANCZOS)
+                if doel.lower().endswith((".jpg", ".jpeg")):
+                    im.convert("RGB").save(doel, "JPEG", quality=74, optimize=True, progressive=True)
+                else:
+                    im.save(doel)
+            except Exception as fout:
+                waarschuwingen.append(f"fotos/{rel}: kon niet verwerkt worden ({fout})")
+
+verwerk_fotos()
 
 alle = []
 for L in TALEN:

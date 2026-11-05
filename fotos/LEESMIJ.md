@@ -1,10 +1,7 @@
 # Foto's
 
-Hier staan de foto's die op de kaart te zien zijn, in een mapje per plek.
-De naam van het mapje is de id van de plek uit `inhoud/plekken.yml`, bijvoorbeeld `quinta/` of `trinta/`.
+Hier staan de foto's die op de kaart te zien zijn, in een mapje per plek, bijvoorbeeld `theater/` of `trinta/`.
 
-* Alleen foto's zonder herkenbare gezichten.
-* Liefst liggend formaat, ongeveer 1600 pixels breed en kleiner dan 400 kB.
-* Originele, grote foto's horen in `fotos-origineel/`. Die map gaat niet online.
-
-Na het toevoegen noem je de foto in `inhoud/plekken.yml` bij de juiste plek, met een korte beschrijving in het Nederlands, Portugees en Engels.
+* Alleen foto's waarvoor de mensen die erop staan toestemming hebben gegeven. Bij jongeren onder de 16 geven hun ouders die toestemming.
+* Grote foto's van de telefoon zijn prima. De site maakt ze bij het bouwen zelf kleiner en haalt de verborgen gegevens eruit.
+* Een foto verschijnt pas op de kaart als hij bij een plek in `inhoud/plekken/` staat, met een bijschrift in drie talen. In het beheerscherm gaat dat vanzelf.

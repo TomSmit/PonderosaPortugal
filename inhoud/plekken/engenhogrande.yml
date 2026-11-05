@@ -1,0 +1,21 @@
+id: engenhogrande
+volgorde: 80
+lat: 40.5104
+lon: -7.36064
+hoofdplek: false
+nl:
+  naam: Engenho Grande
+  onder: Fábrica de Marrocos
+  tekst: De ruïne van een oude wolfabriek aan de Mondego, ten westen van de quinta. Langs deze rivier draaiden vroeger watermolens en wolfabrieken op de kracht van het water.
+  nog_schrijven: false
+pt:
+  naam: Engenho Grande
+  onder: Fábrica de Marrocos
+  tekst: As ruínas de uma antiga fábrica de lanifícios junto ao Mondego, a poente da quinta. Ao longo deste rio havia moinhos de água e fábricas de lanifícios movidos pela força da água.
+  nog_schrijven: false
+en:
+  naam: Engenho Grande
+  onder: Fábrica de Marrocos
+  tekst: The ruin of an old wool factory on the Mondego, west of the quinta. Along this river, water mills and wool factories once ran on the power of the water.
+  nog_schrijven: false
+fotos: []

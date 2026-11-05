@@ -1,0 +1,21 @@
+id: cascata
+volgorde: 190
+lat: 40.53232
+lon: -7.33124
+hoofdplek: false
+nl:
+  naam: Cascata do Caldeirão
+  onder: Waterval bij de dam
+  tekst: Een waterval vlak bij de dam van het stuwmeer, met een uitkijkplatform.
+  nog_schrijven: false
+pt:
+  naam: Cascata do Caldeirão
+  onder: Cascata junto à barragem
+  tekst: Uma cascata mesmo junto à barragem da albufeira, com uma plataforma de observação.
+  nog_schrijven: false
+en:
+  naam: Cascata do Caldeirão
+  onder: Waterfall by the dam
+  tekst: A waterfall right next to the reservoir dam, with a viewing platform.
+  nog_schrijven: false
+fotos: []

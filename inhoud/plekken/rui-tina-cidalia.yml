@@ -1,0 +1,41 @@
+id: rui-tina-cidalia
+volgorde: 130
+lat: 40.506037
+lon: -7.356091
+hoofdplek: false
+nl:
+  naam: Rui, Tina en Cidalia
+  onder: Trinta
+  tekst: Hier wonen Rui, Tina en Cidalia.
+  nog_schrijven: true
+pt:
+  naam: Rui, Tina e Cidalia
+  onder: Trinta
+  tekst: Aqui vivem o Rui, a Tina e a Cidalia.
+  nog_schrijven: true
+en:
+  naam: Rui, Tina and Cidalia
+  onder: Trinta
+  tekst: Rui, Tina and Cidalia live here.
+  nog_schrijven: true
+fotos:
+- bestand: /fotos/rui-tina-cidalia/bij-de-kasten.jpg
+  nl: Samen bij de bijenkasten
+  pt: Juntos junto às colmeias
+  en: Together at the hives
+- bestand: /fotos/rui-tina-cidalia/imkerpak.jpg
+  nl: In het imkerpak op weg naar de kasten
+  pt: De fato de apicultor a caminho das colmeias
+  en: In a beekeeping suit on the way to the hives
+- bestand: /fotos/rui-tina-cidalia/bijenkast.jpg
+  nl: Een bijenkast gaat open
+  pt: Uma colmeia aberta
+  en: An open hive
+- bestand: /fotos/rui-tina-cidalia/stuifmeel.jpg
+  nl: Potjes stuifmeel
+  pt: Frascos de pólen
+  en: Jars of pollen
+- bestand: /fotos/rui-tina-cidalia/houtvuur.jpg
+  nl: Vis op het houtvuur
+  pt: Peixe nas brasas
+  en: Fish over the wood fire

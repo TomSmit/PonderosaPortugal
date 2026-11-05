@@ -1,0 +1,30 @@
+id: quinta
+volgorde: 10
+lat: 40.51375
+lon: -7.35215
+hoofdplek: true
+nl:
+  naam: Quinta Dionisio
+  onder: Het hart van de zomer
+  tekst: |-
+    Hier woon je. Een quinta op de helling, vlak boven de rivier. Vroeger was het een roggemolen.
+
+    Er is stromend water en een beetje stroom, en wat er moet gebeuren doe je samen.
+  nog_schrijven: false
+pt:
+  naam: Quinta Dionisio
+  onder: O coração do verão
+  tekst: |-
+    É aqui que o grupo vive. Uma quinta na encosta, mesmo por cima do rio. Em tempos foi um moinho de centeio.
+
+    Há água corrente e um pouco de eletricidade, e o que é preciso fazer faz-se em conjunto.
+  nog_schrijven: false
+en:
+  naam: Quinta Dionisio
+  onder: The heart of the summer
+  tekst: |-
+    This is where you live. A quinta on the slope, just above the river. It used to be a rye mill.
+
+    There is running water and a little electricity, and whatever needs doing, you do together.
+  nog_schrijven: false
+fotos: []

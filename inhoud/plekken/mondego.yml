@@ -1,0 +1,34 @@
+id: mondego
+volgorde: 70
+lat: 40.5118
+lon: -7.3656
+hoofdplek: false
+nl:
+  naam: Aan de rivier
+  onder: Rio Mondego
+  tekst: |-
+    De Mondego ontspringt hogerop in de Serra da Estrela en slingert hier door een diepe vallei.
+
+    In de zomer is het water helder en koud. Het is de plek om af te koelen na een dag werken.
+  nog_schrijven: false
+pt:
+  naam: Junto ao rio
+  onder: Rio Mondego
+  tekst: |-
+    O Mondego nasce mais acima, na Serra da Estrela, e serpenteia aqui por um vale profundo.
+
+    No verão a água é límpida e fria. É o sítio para refrescar depois de um dia de trabalho.
+  nog_schrijven: false
+en:
+  naam: By the river
+  onder: Rio Mondego
+  tekst: |-
+    The Mondego rises higher up in the Serra da Estrela and winds through a deep valley here.
+
+    In summer the water is clear and cold. It is the place to cool off after a day of work.
+  nog_schrijven: false
+fotos:
+- bestand: /fotos/mondego/mondego.jpg
+  nl: De Mondego, stil en helder
+  pt: O Mondego, calmo e límpido
+  en: The Mondego, calm and clear

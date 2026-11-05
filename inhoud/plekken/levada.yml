@@ -1,0 +1,21 @@
+id: levada
+volgorde: 160
+lat: 40.52587
+lon: -7.34931
+hoofdplek: false
+nl:
+  naam: Levada do Pateiro
+  onder: Oud waterkanaal
+  tekst: Een oud waterkanaal langs de rivier, met een klein stuwtje en een oude waterkrachtcentrale.
+  nog_schrijven: false
+pt:
+  naam: Levada do Pateiro
+  onder: Antiga levada
+  tekst: Uma antiga levada ao longo do rio, com um pequeno açude e uma antiga central hidroelétrica.
+  nog_schrijven: false
+en:
+  naam: Levada do Pateiro
+  onder: Old water channel
+  tekst: An old water channel along the river, with a small weir and an old hydroelectric station.
+  nog_schrijven: false
+fotos: []
