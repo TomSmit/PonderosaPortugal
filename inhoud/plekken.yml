@@ -59,6 +59,10 @@
       nl: "Uitzicht over het dak van Mirjams huis"
       pt: "Vista sobre o telhado da casa da Mirjam"
       en: "The view over the roof of Mirjam's house"
+    - bestand: mirjam/ezel-bij-huis.jpg
+      nl: "Een ezel bij het huis van Mirjam"
+      pt: "Um burro junto à casa da Mirjam"
+      en: "A donkey by Mirjam's house"
 - id: buitenkeuken
   lat: 40.513307
   lon: -7.351667
@@ -83,10 +87,6 @@
       nl: "Een nieuwsgierige ezel"
       pt: "Um burro curioso"
       en: "A curious donkey"
-    - bestand: abelhas/ezel-bij-huis.jpg
-      nl: "Een ezel bij het oude stenen huis"
-      pt: "Um burro junto à velha casa de pedra"
-      en: "A donkey by the old stone house"
     - bestand: abelhas/twee-ezels.jpg
       nl: "Twee ezels aan het hek"
       pt: "Dois burros à cerca"
