@@ -1,0 +1,8 @@
+# Wordt automatisch gemaakt, hoort niet in de repository
+_site/
+__pycache__/
+# Originele foto's (groot, mogelijk met gezichten). Alleen de verkleinde versies in fotos/ gaan online.
+fotos-origineel/
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,31 @@
+# Losse teksten die op meerdere pagina's terugkomen.
+naar_kaart: Naar de kaart
+lees_verder: Lees verder
+menu: Menu
+contact:
+  bellen: Bellen of appen
+  telefoon: +31 6 51947969
+  email: E-mail
+  info: info@ponderosaportugal.nl
+  info_uitleg: voor vragen
+  aanmelden: aanmelden@ponderosaportugal.nl
+  aanmelden_uitleg: om aan te melden
+  zomergroep: Zomergroep
+  zomergroep_tekst: aanmelden tot eind april
+formulier:
+  titel: Aanmelden
+  naam: Je naam
+  rol: Je rol
+  rollen:
+  - Ouder of verzorger
+  - Jeugdconsulent of verwijzer
+  - Jongere
+  - Anders
+  email: E-mail
+  telefoon: Telefoon
+  gemeente: Gemeente van de jongere
+  leeftijd: Leeftijd van de jongere
+  waarom: Waarom denk je aan dit traject?
+  versturen: Aanmelding versturen
+  privacy: Zet hier geen medische of andere gevoelige gegevens in. Die bespreken we liever persoonlijk.
+  verstuurd: Dit is nog een voorbeeld. Het formulier verstuurt nu nog niets.

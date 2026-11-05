@@ -1,0 +1,24 @@
+# Teksten op de kaart zelf. De verhalen per plek staan in plekken.yml.
+titel: Ponderosa Portugal
+ondertitel: Zes weken op Quinta Dionisio, een boerderij in de vallei van de Mondego. Het dorp Trinta ligt erboven op de helling en de rivier stroomt er vlak langs.
+knop: Wat gebeurt hier?
+kaartlabel: Geïllustreerde 3D-kaart van de vallei bij Trinta
+teksten:
+  loading: De vallei wordt geschilderd…
+  home: Overzicht
+  north: Noorden boven
+  close: Sluiten
+  sources: Bronnen van de kaart
+  credit: 'Hoogtedata: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">AWS Terrain Tiles</a>. Kaart: © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>-bijdragers.'
+  hint: Sleep om te draaien, scroll of knijp om te zoomen. Klik op een plek.
+  places: Alle plekken
+  nogl: Je apparaat kan de 3D-kaart niet tonen. Hieronder zie je de vallei van bovenaf.
+  todo: Het verhaal van deze plek volgt nog.
+  next: Volgende plek
+  prev: Vorige plek
+  height: hoogte
+plaatsnamen:
+  corujeira: Corujeira
+  meios: Meios
+  mondego: Rio Mondego
+  albufeira: Albufeira do Caldeirão

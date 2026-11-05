@@ -1,0 +1,31 @@
+# Losse teksten die op meerdere pagina's terugkomen.
+naar_kaart: To the map
+lees_verder: Read on
+menu: Menu
+contact:
+  bellen: Call or WhatsApp
+  telefoon: +31 6 51947969
+  email: Email
+  info: info@ponderosaportugal.nl
+  info_uitleg: for questions
+  aanmelden: aanmelden@ponderosaportugal.nl
+  aanmelden_uitleg: for applications
+  zomergroep: Summer group
+  zomergroep_tekst: applications until the end of April
+formulier:
+  titel: Apply
+  naam: Your name
+  rol: Your role
+  rollen:
+  - Parent or carer
+  - Youth consultant or referrer
+  - Young person
+  - Other
+  email: Email
+  telefoon: Phone
+  gemeente: Young person's municipality
+  leeftijd: Young person's age
+  waarom: Why are you considering this programme?
+  versturen: Send application
+  privacy: Please do not include medical or other sensitive details here. We would rather discuss those in person.
+  verstuurd: This is still an example. The form does not send anything yet.

@@ -1,0 +1,24 @@
+# Teksten op de kaart zelf. De verhalen per plek staan in plekken.yml.
+titel: Ponderosa Portugal
+ondertitel: Seis semanas na Quinta Dionisio, uma quinta no vale do Mondego. A aldeia de Trinta fica por cima, na encosta, e o rio corre mesmo ao lado.
+knop: O que acontece aqui?
+kaartlabel: Mapa ilustrado em 3D do vale junto a Trinta
+teksten:
+  loading: A pintar o vale…
+  home: Vista geral
+  north: Norte para cima
+  close: Fechar
+  sources: Fontes do mapa
+  credit: 'Dados de altitude: <a href="https://registry.opendata.aws/terrain-tiles/" target="_blank" rel="noopener">AWS Terrain Tiles</a>. Mapa: © contribuidores do <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>.'
+  hint: Arraste para rodar, use a roda ou dois dedos para aproximar. Clique num lugar.
+  places: Todos os lugares
+  nogl: O seu dispositivo não consegue mostrar o mapa 3D. Em baixo vê o vale visto de cima.
+  todo: A história deste lugar ainda vai ser escrita.
+  next: Lugar seguinte
+  prev: Lugar anterior
+  height: altitude
+plaatsnamen:
+  corujeira: Corujeira
+  meios: Meios
+  mondego: Rio Mondego
+  albufeira: Albufeira do Caldeirão

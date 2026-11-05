@@ -1,0 +1,85 @@
+# Alle plekken op de kaart: waar ze liggen en welke foto's erbij horen.
+# Foto's zet je in de map fotos/<id van de plek>/ en je noemt ze hier, met een korte beschrijving per taal.
+# Voorbeeld:
+#   fotos:
+#     - bestand: quinta/lange-tafel.jpg
+#       nl: De lange tafel op een zomeravond
+#       pt: A mesa comprida numa noite de verão
+#       en: The long table on a summer evening
+- id: quinta
+  lat: 40.51375
+  lon: -7.35215
+  hoofdplek: true
+  fotos: []
+- id: theater
+  lat: 40.514346
+  lon: -7.353098
+  fotos: []
+- id: mirjam
+  lat: 40.513407
+  lon: -7.351765
+  fotos: []
+- id: buitenkeuken
+  lat: 40.513307
+  lon: -7.351667
+  fotos: []
+- id: rio
+  lat: 40.5118
+  lon: -7.3656
+  fotos: []
+- id: engenhogrande
+  lat: 40.5104
+  lon: -7.36064
+  fotos: []
+- id: videmonte
+  lat: 40.51499
+  lon: -7.39319
+  fotos: []
+- id: trinta
+  lat: 40.5038
+  lon: -7.35498
+  fotos: []
+- id: cafe
+  lat: 40.504509
+  lon: -7.354698
+  fotos: []
+- id: bakker
+  lat: 40.503591
+  lon: -7.354595
+  fotos: []
+- id: huisrui
+  lat: 40.506037
+  lon: -7.356091
+  fotos: []
+- id: miradouro
+  lat: 40.52622
+  lon: -7.34536
+  fotos: []
+- id: levada
+  lat: 40.52587
+  lon: -7.34931
+  fotos: []
+- id: vilasoeiro
+  lat: 40.53961
+  lon: -7.34286
+  fotos: []
+- id: ponte
+  lat: 40.54041
+  lon: -7.33784
+  fotos: []
+- id: cascata
+  lat: 40.53232
+  lon: -7.33124
+  fotos: []
+- id: barragem
+  lat: 40.5317
+  lon: -7.3299
+  fotos: []
+- id: bar
+  lat: 40.516424
+  lon: -7.330038
+  fotos: []
+- id: praia
+  lat: 40.517133
+  lon: -7.330304
+  fotos: []

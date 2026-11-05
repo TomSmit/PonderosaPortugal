@@ -1,0 +1,112 @@
+# Het verhaal van elke plek op de kaart. Elke regel onder "tekst" is een alinea.
+# Staat er "nog_schrijven: true", dan ziet de bezoeker dat het verhaal nog volgt. Haal die regel weg als de tekst af is.
+quinta:
+  naam: Quinta Dionisio
+  onder: O coração do verão
+  tekst:
+  - É aqui que o grupo vive. Uma quinta na encosta, mesmo por cima do rio. Em tempos foi um moinho de centeio.
+  - Há água corrente e um pouco de eletricidade, e o que é preciso fazer faz-se em conjunto.
+theater:
+  naam: O teatro
+  onder: Na quinta
+  tekst:
+  - O teatro da quinta, na parte de cima do terreno.
+  nog_schrijven: true
+mirjam:
+  naam: A casa da Mirjam
+  onder: Na quinta
+  tekst:
+  - Aqui vive a Mirjam, na quinta.
+  nog_schrijven: true
+buitenkeuken:
+  naam: A cozinha exterior
+  onder: Na quinta
+  tekst:
+  - A cozinha exterior da quinta, onde o grupo cozinha em conjunto.
+  nog_schrijven: true
+rio:
+  naam: Junto ao rio
+  onder: Rio Mondego
+  tekst:
+  - O Mondego nasce mais acima, na Serra da Estrela, e serpenteia aqui por um vale profundo.
+  - No verão a água é límpida e fria. É o sítio para refrescar depois de um dia de trabalho.
+engenhogrande:
+  naam: Engenho Grande
+  onder: Fábrica de Marrocos
+  tekst:
+  - As ruínas de uma antiga fábrica de lanifícios junto ao Mondego, a poente da quinta. Ao longo deste rio havia moinhos de água e fábricas de lanifícios movidos pela força da água.
+videmonte:
+  naam: Videmonte
+  onder: A aldeia no fim do percurso
+  tekst:
+  - A poente fica Videmonte, na encosta sobre o rio.
+  - É aqui que terminam os Passadiços do Mondego. Quem faz o percurso inteiro chega aqui ao fim de cerca de 12 quilómetros.
+trinta:
+  naam: Trinta
+  onder: A aldeia
+  tekst:
+  - No alto da encosta fica Trinta. Aqui toda a gente se conhece.
+  - Aqui os jovens conhecem quem viveu a vida inteira no vale. Uma conversa na praça faz parte, mesmo sem saber ainda falar português.
+cafe:
+  naam: Cafe Central
+  onder: Café em Trinta
+  tekst:
+  - O café na praça de Trinta.
+  nog_schrijven: true
+bakker:
+  naam: A padaria
+  onder: Trinta
+  tekst:
+  - A padaria de Trinta.
+  nog_schrijven: true
+huisrui:
+  naam: Rui, Tina e Cidalia
+  onder: Trinta
+  tekst:
+  - Aqui vivem o Rui, a Tina e a Cidalia.
+  nog_schrijven: true
+miradouro:
+  naam: Passadiços do Mondego
+  onder: Miradouro do Alto Mondego
+  tekst:
+  - 'Ao longo do rio seguem os Passadiços do Mondego: cerca de 12 quilómetros de passadiços e pontes suspensas, da Barragem do Caldeirão até Videmonte.'
+  - Deste miradouro vê-se a curva do rio. Às vezes fazemos um troço do percurso, e quem quiser pode um dia ir a pé até Videmonte.
+levada:
+  naam: Levada do Pateiro
+  onder: Antiga levada
+  tekst:
+  - Uma antiga levada ao longo do rio, com um pequeno açude e uma antiga central hidroelétrica.
+vilasoeiro:
+  naam: Vila Soeiro
+  onder: Aldeia junto ao Mondego
+  tekst:
+  - Uma pequena aldeia junto ao rio, a norte da quinta.
+  - Aqui há uma entrada intermédia dos Passadiços do Mondego. Perto ficam as ruínas de antigas fábricas movidas pela água do rio.
+ponte:
+  naam: Ponte da Mizarela
+  onder: Ponte medieval
+  tekst:
+  - Uma ponte medieval sobre o Mondego, perto de Vila Soeiro. Os Passadiços do Mondego passam por aqui.
+cascata:
+  naam: Cascata do Caldeirão
+  onder: Cascata junto à barragem
+  tekst:
+  - Uma cascata mesmo junto à barragem da albufeira, com uma plataforma de observação.
+barragem:
+  naam: Barragem do Caldeirão
+  onder: Albufeira e barragem
+  tekst:
+  - A nascente fica a albufeira do Caldeirão, com a barragem no lado norte. Junto à barragem fica a Cascata do Caldeirão.
+  - É junto à barragem que começa o percurso ao longo do Mondego.
+bar:
+  naam: O bar da albufeira
+  onder: Junto ao Caldeirão
+  tekst:
+  - Na margem da albufeira, perto da praia fluvial.
+  nog_schrijven: true
+praia:
+  naam: Praia Fluvial
+  onder: Zona de banhos na albufeira
+  tekst:
+  - A praia fluvial da albufeira do Caldeirão.
+  nog_schrijven: true

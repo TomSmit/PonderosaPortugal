@@ -1,0 +1,112 @@
+# Het verhaal van elke plek op de kaart. Elke regel onder "tekst" is een alinea.
+# Staat er "nog_schrijven: true", dan ziet de bezoeker dat het verhaal nog volgt. Haal die regel weg als de tekst af is.
+quinta:
+  naam: Quinta Dionisio
+  onder: The heart of the summer
+  tekst:
+  - This is where you live. A quinta on the slope, just above the river. It used to be a rye mill.
+  - There is running water and a little electricity, and whatever needs doing, you do together.
+theater:
+  naam: The theatre
+  onder: At the quinta
+  tekst:
+  - The theatre at the quinta, at the top of the grounds.
+  nog_schrijven: true
+mirjam:
+  naam: Mirjam's house
+  onder: At the quinta
+  tekst:
+  - Mirjam lives here, at the quinta.
+  nog_schrijven: true
+buitenkeuken:
+  naam: The outdoor kitchen
+  onder: At the quinta
+  tekst:
+  - The outdoor kitchen at the quinta, where the group cooks together.
+  nog_schrijven: true
+rio:
+  naam: By the river
+  onder: Rio Mondego
+  tekst:
+  - The Mondego rises higher up in the Serra da Estrela and winds through a deep valley here.
+  - In summer the water is clear and cold. It is the place to cool off after a day of work.
+engenhogrande:
+  naam: Engenho Grande
+  onder: Fábrica de Marrocos
+  tekst:
+  - The ruin of an old wool factory on the Mondego, west of the quinta. Along this river, water mills and wool factories once ran on the power of the water.
+videmonte:
+  naam: Videmonte
+  onder: The village at the end of the route
+  tekst:
+  - To the west lies Videmonte, on the slope above the river.
+  - The Passadiços do Mondego end here. Walk the whole route and you arrive after about 12 kilometres.
+trinta:
+  naam: Trinta
+  onder: The village
+  tekst:
+  - At the top of the slope lies Trinta. Everyone knows everyone here.
+  - Here you meet people who have lived in the valley all their lives. A chat on the square is part of it, even if you do not speak Portuguese yet.
+cafe:
+  naam: Cafe Central
+  onder: Café in Trinta
+  tekst:
+  - The café on the square in Trinta.
+  nog_schrijven: true
+bakker:
+  naam: The bakery
+  onder: Trinta
+  tekst:
+  - The bakery of Trinta.
+  nog_schrijven: true
+huisrui:
+  naam: Rui, Tina and Cidalia
+  onder: Trinta
+  tekst:
+  - Rui, Tina and Cidalia live here.
+  nog_schrijven: true
+miradouro:
+  naam: Passadiços do Mondego
+  onder: Miradouro do Alto Mondego
+  tekst:
+  - 'Along the river run the Passadiços do Mondego: some 12 kilometres of wooden walkways and suspension bridges, from the Caldeirão dam to Videmonte.'
+  - From this viewpoint you can see the bend of the river. Sometimes we walk part of the route, and if you like you can go all the way to Videmonte one day.
+levada:
+  naam: Levada do Pateiro
+  onder: Old water channel
+  tekst:
+  - An old water channel along the river, with a small weir and an old hydroelectric station.
+vilasoeiro:
+  naam: Vila Soeiro
+  onder: Village on the Mondego
+  tekst:
+  - A small village by the river, north of the quinta.
+  - There is an intermediate entrance to the Passadiços do Mondego here. Nearby are the remains of old factories that ran on the river's water.
+ponte:
+  naam: Ponte da Mizarela
+  onder: Medieval bridge
+  tekst:
+  - A medieval bridge over the Mondego, near Vila Soeiro. The Passadiços do Mondego pass by it.
+cascata:
+  naam: Cascata do Caldeirão
+  onder: Waterfall by the dam
+  tekst:
+  - A waterfall right next to the reservoir dam, with a viewing platform.
+barragem:
+  naam: Barragem do Caldeirão
+  onder: Reservoir and dam
+  tekst:
+  - To the east lies the Caldeirão reservoir, with the dam at its northern end. Close to the dam is the Cascata do Caldeirão.
+  - The walking route along the Mondego starts at the dam.
+bar:
+  naam: The bar by the reservoir
+  onder: At the Caldeirão
+  tekst:
+  - On the shore of the reservoir, close to the swimming spot.
+  nog_schrijven: true
+praia:
+  naam: Praia Fluvial
+  onder: Swimming spot at the reservoir
+  tekst:
+  - The swimming spot at the Caldeirão reservoir.
+  nog_schrijven: true

@@ -1,0 +1,7 @@
+# Instellingen van de website.
+# adres: het hoofdadres van de site, zonder schuine streep aan het eind.
+# live: zet op true zodra de site echt online mag. Zolang hier false staat,
+#       vragen we zoekmachines om de site nog niet op te nemen.
+adres: https://ponderosaportugal.nl
+domein: ponderosaportugal.nl
+live: false

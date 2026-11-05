@@ -1,0 +1,31 @@
+# Losse teksten die op meerdere pagina's terugkomen.
+naar_kaart: Ver o mapa
+lees_verder: Continuar a ler
+menu: Menu
+contact:
+  bellen: Telefone ou WhatsApp
+  telefoon: +31 6 51947969
+  email: E-mail
+  info: info@ponderosaportugal.nl
+  info_uitleg: para perguntas
+  aanmelden: aanmelden@ponderosaportugal.nl
+  aanmelden_uitleg: para inscrições
+  zomergroep: Grupo de verão
+  zomergroep_tekst: inscrições até ao fim de abril
+formulier:
+  titel: Inscrição
+  naam: O seu nome
+  rol: O seu papel
+  rollen:
+  - Pai, mãe ou encarregado
+  - Técnico ou encaminhador
+  - Jovem
+  - Outro
+  email: E-mail
+  telefoon: Telefone
+  gemeente: Município do jovem
+  leeftijd: Idade do jovem
+  waarom: Porque pensa neste percurso?
+  versturen: Enviar inscrição
+  privacy: Não escreva aqui dados médicos ou outros dados sensíveis. Preferimos falar disso pessoalmente.
+  verstuurd: Isto ainda é um exemplo. O formulário ainda não envia nada.
