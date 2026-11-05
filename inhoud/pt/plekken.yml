@@ -24,7 +24,7 @@ buitenkeuken:
   tekst:
   - A cozinha exterior da quinta, onde o grupo cozinha em conjunto.
   nog_schrijven: true
-rio:
+mondego:
   naam: Junto ao rio
   onder: Rio Mondego
   tekst:
@@ -59,13 +59,13 @@ bakker:
   tekst:
   - A padaria de Trinta.
   nog_schrijven: true
-huisrui:
+rui-tina-cidalia:
   naam: Rui, Tina e Cidalia
   onder: Trinta
   tekst:
   - Aqui vivem o Rui, a Tina e a Cidalia.
   nog_schrijven: true
-miradouro:
+passadicos:
   naam: Passadiços do Mondego
   onder: Miradouro do Alto Mondego
   tekst:
@@ -82,7 +82,7 @@ vilasoeiro:
   tekst:
   - Uma pequena aldeia junto ao rio, a norte da quinta.
   - Aqui há uma entrada intermédia dos Passadiços do Mondego. Perto ficam as ruínas de antigas fábricas movidas pela água do rio.
-ponte:
+mizarela:
   naam: Ponte da Mizarela
   onder: Ponte medieval
   tekst:
@@ -109,4 +109,22 @@ praia:
   onder: Zona de banhos na albufeira
   tekst:
   - A praia fluvial da albufeira do Caldeirão.
+  nog_schrijven: true
+abelhas:
+  naam: Casa de Abelhas
+  onder: A casa das abelhas
+  tekst:
+  - A casa das abelhas, perto da quinta.
+  nog_schrijven: true
+hangbrug:
+  naam: Ponte Suspensa
+  onder: Ponte suspensa
+  tekst:
+  - Uma das pontes suspensas dos Passadiços do Mondego, perto da quinta.
+  nog_schrijven: true
+uitzicht:
+  naam: O miradouro
+  onder: Vista sobre o vale
+  tekst:
+  - Um miradouro a nordeste da quinta.
   nog_schrijven: true

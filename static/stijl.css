@@ -207,8 +207,8 @@ body.pagina #page{position:static;min-height:100vh;overflow:visible}
 .fotos{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;margin:4px -28px 18px;padding:10px 28px 16px;scrollbar-width:thin}
 .fotos figure{flex:none;scroll-snap-align:start;margin:0;background:#fff;padding:8px 8px 6px;box-shadow:2px 3px 10px rgba(43,36,32,.22);transform:rotate(var(--r,0deg));cursor:zoom-in;transition:transform .2s}
 .fotos figure:hover{transform:rotate(0deg) translateY(-2px)}
-.fotos img{display:block;width:220px;height:165px;object-fit:cover;background:#eee6d6}
-.fotos figcaption{font-family:var(--f-hand);font-size:15px;line-height:1.25;color:var(--ink);max-width:220px;padding-top:6px}
+.fotos img{display:block;width:200px;height:150px;object-fit:cover;background:#eee6d6}
+.fotos figcaption{font-family:var(--f-hand);font-size:15px;line-height:1.25;color:var(--ink);max-width:200px;padding-top:6px}
 @media (max-width:700px){ .fotos{margin:4px -20px 14px;padding:8px 20px 14px} .fotos img{width:180px;height:135px} .fotos figcaption{max-width:180px} }
 #lightbox{position:fixed;inset:0;z-index:50;background:rgba(43,36,32,.82);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px;cursor:zoom-out}
 #lightbox[hidden]{display:none}
