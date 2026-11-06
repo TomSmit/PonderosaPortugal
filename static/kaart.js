@@ -452,15 +452,14 @@ void main(){
   vec2 jit=(vec2(noise(vUv*uRes*0.02), noise(vUv*uRes*0.02+17.0))-0.5)*1.4*px*uScale;
   vec2 uv=vUv+jit;
   float d0=texture2D(tDepth,uv).r, c0=lin(d0);
-  float e=0.0;
   float o=uScale*(0.9+0.5*noise(vUv*uRes*0.05));
-  for(int i=0;i<4;i++){
-    vec2 dd = i==0?vec2(o,0.0):i==1?vec2(-o,0.0):i==2?vec2(0.0,o):vec2(0.0,-o);
-    float dn=texture2D(tDepth,uv+dd*px).r;
-    float cn=lin(dn);
-    float rel=abs(cn-c0)/min(cn,c0);
-    e=max(e, rel);
-  }
+  // tweede afgeleide: een gladde helling die schuin wegloopt geeft geen lijn, een echte rand wel
+  float cl=lin(texture2D(tDepth,uv+vec2(-o,0.0)*px).r), cr=lin(texture2D(tDepth,uv+vec2(o,0.0)*px).r);
+  float cu=lin(texture2D(tDepth,uv+vec2(0.0,o)*px).r), cd=lin(texture2D(tDepth,uv+vec2(0.0,-o)*px).r);
+  float q=c0*c0*(1.0/uNear-1.0/uFar)/65535.0*3.0;      // marge voor een grove dieptebuffer op telefoons
+  float ex=max(abs(cl+cr-2.0*c0)-q, 0.0)/min(min(cl,cr),c0);
+  float ey=max(abs(cu+cd-2.0*c0)-q, 0.0)/min(min(cu,cd),c0);
+  float e=max(ex,ey);
   float ink=smoothstep(0.018,0.05,e);
   vec4 col=texture2D(tColor,vUv);
   float a=max(col.a, ink*0.9);
@@ -721,6 +720,9 @@ let goal=null;
 const HOME=(()=>{ const f=[0.5,0.56]; const w=toWorld(f[0],f[1]); return { tx:w[0], ty:Math.max(w[1]-80,250), tz:w[2], dist:SMALL?15500:8600, az:Math.PI+0.12, pol:0.95 }; })();
 const INTRO={ tx:0, ty:300, tz:0, dist:SMALL?26000:17000, pol:0.38, az:Math.PI+0.85 };
 function applyCam(){
+  // nabij- en vervlak met de afstand mee, zodat de dieptebuffer overal genoeg precisie heeft
+  const nr=Math.max(10, cam.dist*0.06), fr=cam.dist+14000;
+  if(Math.abs(camera.near-nr)>0.5 || Math.abs(camera.far-fr)>1){ camera.near=nr; camera.far=fr; camera.updateProjectionMatrix(); if(inkMat){ inkMat.uniforms.uNear.value=nr; inkMat.uniforms.uFar.value=fr; } }
   const sp=Math.sin(cam.pol), cp=Math.cos(cam.pol);
   camera.position.set(cam.tx+cam.dist*sp*Math.sin(cam.az), cam.ty+cam.dist*cp, cam.tz+cam.dist*sp*Math.cos(cam.az));
   camera.lookAt(cam.tx,cam.ty,cam.tz);
