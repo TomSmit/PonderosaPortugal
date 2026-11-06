@@ -3,6 +3,7 @@ volgorde: 50
 lat: 40.51334105359551
 lon: -7.350743835238967
 hoofdplek: false
+inzoomen: true
 nl:
   naam: Casa de Abelhas
   onder: Het bijenhuis

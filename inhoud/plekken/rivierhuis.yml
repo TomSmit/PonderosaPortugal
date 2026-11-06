@@ -3,6 +3,7 @@ volgorde: 32
 lat: 40.513629205276715
 lon: -7.351982395690953
 hoofdplek: false
+inzoomen: true
 nl:
   naam: Het rivierhuis
   onder: Op de quinta

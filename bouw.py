@@ -86,7 +86,8 @@ for f in sorted(os.listdir(PLEKMAP)):
         p["_bestand"] = "inhoud/plekken/" + f
         plekken_bron.append(p)
 plekken_bron.sort(key=lambda p: (p.get("volgorde", 999), p["id"]))
-punten = [{"id": p["id"], "lat": p["lat"], "lon": p["lon"], "hoofdplek": bool(p.get("hoofdplek"))} for p in plekken_bron]
+punten = [{"id": p["id"], "lat": p["lat"], "lon": p["lon"], "hoofdplek": bool(p.get("hoofdplek")),
+           "inzoomen": bool(p.get("inzoomen"))} for p in plekken_bron]
 
 FOTO_EXT = (".jpg", ".jpeg", ".png", ".webp", ".heic", ".heif")
 

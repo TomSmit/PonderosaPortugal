@@ -9,7 +9,7 @@ const ROOT = window.ROOT || "";
 /* De teksten en plekken komen uit de map inhoud/ en worden door bouw.py in de pagina gezet. */
 const K = window.KAART;
 const CONTENT = { [lang]: { ui:K.teksten, title:K.titel, sub:K.ondertitel, places:K.plaatsnamen, spots:K.plekken } };
-const SPOTS = window.PUNTEN.map(p=>({ id:p.id, lat:p.lat, lon:p.lon, main:!!p.hoofdplek }));
+const SPOTS = window.PUNTEN.map(p=>({ id:p.id, lat:p.lat, lon:p.lon, main:!!p.hoofdplek, dichtbij:!!p.inzoomen }));
 const PLACES = [
   { id:"corujeira", lat:40.50689, lon:-7.33855 },
   { id:"meios",     lat:40.49390, lon:-7.36029 },
@@ -118,7 +118,7 @@ const pins = SPOTS.map(s=>{
   btn.style.setProperty("--rot", ((SPOTS.indexOf(s)*37%7)-3)*0.8+"deg");
   el.appendChild(btn); labelLayer.appendChild(el);
   const f=frac(s.lat,s.lon);
-  return { id:s.id, el, btn, f, pos:toWorld(f[0],f[1],2) };
+  return { id:s.id, el, btn, f, pos:toWorld(f[0],f[1],2), dichtbij:s.dichtbij };
 });
 const places = PLACES.map(s=>{
   const el=document.createElement("div"); el.className="place"+(s.water?" water":"");
@@ -756,7 +756,9 @@ function placeLabels(){
   const boxes=[];
   const far=cam.dist>6500;
   const on=pins.filter(p=>p.el.classList.contains("on"));
-  const order=[...on, ...pins.filter(p=>p.el.classList.contains("main")&&!on.includes(p)), ...pins.filter(p=>!p.el.classList.contains("main")&&!on.includes(p)), ...places];
+  const near=cam.dist<(SMALL?3500:2500);   // kleine plekjes komen pas tevoorschijn als je inzoomt
+  const rest=pins.filter(p=>!on.includes(p));
+  const order=[...on, ...rest.filter(p=>p.el.classList.contains("main")), ...rest.filter(p=>!p.el.classList.contains("main")&&!p.dichtbij), ...rest.filter(p=>p.dichtbij), ...places];
   order.forEach(p=>{
     tmp.set(p.pos[0],p.pos[1],p.pos[2]).project(camera);
     let vis=tmp.z<1 && Math.abs(tmp.x)<1.05 && Math.abs(tmp.y)<1.05;
@@ -766,6 +768,7 @@ function placeLabels(){
       if(terrainHit(camera.position, dir, L-30)){ if(p.btn) dim=true; else vis=false; }
     }
     if(!p.btn && far) vis=false;   // plaatsnamen pas tonen als je inzoomt
+    if(p.dichtbij && !near && !on.includes(p)) vis=false;
     const x=(tmp.x*0.5+0.5)*r.width, y=(-tmp.y*0.5+0.5)*r.height;
     if(vis){
       // vlaggetjes die over een ander vlaggetje vallen, worden even kleiner

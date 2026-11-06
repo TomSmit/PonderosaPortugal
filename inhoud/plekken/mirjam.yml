@@ -3,6 +3,7 @@ volgorde: 30
 lat: 40.513407
 lon: -7.351765
 hoofdplek: false
+inzoomen: true
 nl:
   naam: Het huis van Mirjam
   onder: Op de quinta

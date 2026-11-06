@@ -3,6 +3,7 @@ volgorde: 60
 lat: 40.51432362045743
 lon: -7.350850014016699
 hoofdplek: false
+inzoomen: true
 nl:
   naam: Ponte Suspensa
   onder: Hangbrug

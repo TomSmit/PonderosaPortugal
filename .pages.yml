@@ -46,6 +46,10 @@ content:
       - name: hoofdplek
         label: Grote gele vlag (alleen voor de quinta)
         type: boolean
+      - name: inzoomen
+        label: Pas zichtbaar als je inzoomt
+        type: boolean
+        description: "Voor kleine plekjes dicht bij een andere plek. Van een afstand zie je ze niet, pas als je dichterbij komt."
       - name: nl
         label: Nederlands
         type: object
