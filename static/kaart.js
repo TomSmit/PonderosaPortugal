@@ -222,7 +222,9 @@ function fillVillage(lat, lon, s0){
   const segDist=(p,a,b)=>{ const vx=b[0]-a[0], vz=b[1]-a[1], L=vx*vx+vz*vz||1; let t=((p[0]-a[0])*vx+(p[1]-a[1])*vz)/L; t=Math.max(0,Math.min(1,t)); return Math.hypot(p[0]-a[0]-t*vx, p[1]-a[1]-t*vz); };
   const existing=(V.layers.building||[]).map(b=>{ let x=0,z=0,n=b.length/2; for(let i=0;i<b.length;i+=2){ x+=b[i]; z+=b[i+1]; } return M(x/n,z/n); });
   const placed=[]; seed=s0;
-  const free=(c,r)=>existing.every(e=>Math.hypot(e[0]-c[0],e[1]-c[1])>r+5) && placed.every(h=>Math.hypot(h.x-c[0],h.z-c[1])>r+h.r+1.5) && roads.every(([a,b,n])=>segDist(c,a,b)>(n==="track"?3:5)+r*0.55);
+  const halls=(V.layers.industrie||[]).concat((V.layers.building||[]).filter(b=>b.length>=8));
+  const inHall=c=>{ const fx=c[0]/SX+0.5, fy=c[1]/SZ+0.5; return halls.some(h=>inRing(fx,fy,h)); };
+  const free=(c,r)=>existing.every(e=>Math.hypot(e[0]-c[0],e[1]-c[1])>r+5) && placed.every(h=>Math.hypot(h.x-c[0],h.z-c[1])>r+h.r+1.5) && VILLAGE_HOUSES.every(h=>Math.hypot(h.x-c[0],h.z-c[1])>r+h.r+1.5) && roads.every(([a,b,n])=>segDist(c,a,b)>(n==="track"?3:5)+r*0.55) && !inHall(c);
   const walls=[[0.98,0.96,0.90],[0.97,0.93,0.82],[0.96,0.86,0.78],[0.80,0.78,0.74],[0.99,0.97,0.93],[0.93,0.88,0.72]];
   const roofs=[[0.90,0.42,0.22],[0.84,0.38,0.22],[0.93,0.50,0.28],[0.78,0.34,0.20]];
   roads.forEach(([a,b,n])=>{
