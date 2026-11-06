@@ -1,0 +1,30 @@
+id: pisao
+volgorde: 34
+lat: 40.51350417333157
+lon: -7.351852615597084
+hoofdplek: false
+nl:
+  naam: Pisão
+  onder: Het oude wolwashuis
+  tekst: |-
+    Het Pisão is het oude wolwashuis. Jarenlang stond het er als ruïne bij. Nu is het opgeknapt en kunnen er drie mensen slapen.
+
+    Overdag is het er in de zomer heerlijk koel.
+  nog_schrijven: false
+pt:
+  naam: Pisão
+  onder: A antiga casa de lavar a lã
+  tekst: |-
+    O Pisão é a antiga casa onde se lavava a lã. Durante anos foi uma ruína. Agora está recuperado e podem lá dormir três pessoas.
+
+    No verão, durante o dia, está lá dentro um fresco muito agradável.
+  nog_schrijven: false
+en:
+  naam: Pisão
+  onder: The old wool-washing house
+  tekst: |-
+    The Pisão is the old wool-washing house. For years it stood as a ruin. Now it has been restored and three people can sleep there.
+
+    On summer days it stays wonderfully cool inside.
+  nog_schrijven: false
+fotos: []

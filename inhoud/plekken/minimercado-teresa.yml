@@ -1,0 +1,21 @@
+id: minimercado-teresa
+volgorde: 114
+lat: 40.5032317642348
+lon: -7.354763670957198
+hoofdplek: false
+nl:
+  naam: Minimercado Teresa
+  onder: Winkeltje in Trinta
+  tekst: Een van de winkeltjes in het dorp.
+  nog_schrijven: true
+pt:
+  naam: Minimercado Teresa
+  onder: Minimercado em Trinta
+  tekst: Uma das mercearias da aldeia.
+  nog_schrijven: true
+en:
+  naam: Minimercado Teresa
+  onder: Village shop in Trinta
+  tekst: One of the village shops.
+  nog_schrijven: true
+fotos: []

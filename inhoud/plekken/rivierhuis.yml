@@ -1,0 +1,21 @@
+id: rivierhuis
+volgorde: 32
+lat: 40.513629205276715
+lon: -7.351982395690953
+hoofdplek: false
+nl:
+  naam: Het rivierhuis
+  onder: Op de quinta
+  tekst: Het rivierhuis was lang een ruïne en is nu helemaal opgeknapt. Vanuit het huis kijk je uit over de rivier, en dat uitzicht is indrukwekkend.
+  nog_schrijven: false
+pt:
+  naam: A casa do rio
+  onder: Na quinta
+  tekst: A casa do rio foi durante muito tempo uma ruína e agora está totalmente recuperada. Da casa vê-se o rio, e a vista é impressionante.
+  nog_schrijven: false
+en:
+  naam: The river house
+  onder: At the quinta
+  tekst: The river house was a ruin for a long time and has now been fully restored. From the house you look out over the river, and the view is impressive.
+  nog_schrijven: false
+fotos: []

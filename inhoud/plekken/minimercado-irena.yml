@@ -1,0 +1,21 @@
+id: minimercado-irena
+volgorde: 116
+lat: 40.504110033760334
+lon: -7.35458837370993
+hoofdplek: false
+nl:
+  naam: Minimercado Irena
+  onder: Winkeltje in Trinta
+  tekst: Een van de winkeltjes in het dorp.
+  nog_schrijven: true
+pt:
+  naam: Minimercado Irena
+  onder: Minimercado em Trinta
+  tekst: Uma das mercearias da aldeia.
+  nog_schrijven: true
+en:
+  naam: Minimercado Irena
+  onder: Village shop in Trinta
+  tekst: One of the village shops.
+  nog_schrijven: true
+fotos: []

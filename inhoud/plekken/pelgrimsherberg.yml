@@ -1,0 +1,21 @@
+id: pelgrimsherberg
+volgorde: 118
+lat: 40.5041459688137
+lon: -7.355185436159242
+hoofdplek: false
+nl:
+  naam: Pelgrimsherberg
+  onder: In Trinta
+  tekst: Een herberg voor pelgrims, midden in het dorp.
+  nog_schrijven: true
+pt:
+  naam: Albergue de peregrinos
+  onder: Em Trinta
+  tekst: Um albergue para peregrinos, no centro da aldeia.
+  nog_schrijven: true
+en:
+  naam: Pilgrims' hostel
+  onder: In Trinta
+  tekst: A hostel for pilgrims in the middle of the village.
+  nog_schrijven: true
+fotos: []

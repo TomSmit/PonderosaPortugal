@@ -1,0 +1,21 @@
+id: cadeira-de-encosto
+volgorde: 128
+lat: 40.49641554458778
+lon: -7.3512983223627035
+hoofdplek: false
+nl:
+  naam: Cadeira de Encosto
+  onder: Restaurant in Trinta
+  tekst: Een van de restaurants in Trinta.
+  nog_schrijven: true
+pt:
+  naam: Cadeira de Encosto
+  onder: Restaurante em Trinta
+  tekst: Um dos restaurantes de Trinta.
+  nog_schrijven: true
+en:
+  naam: Cadeira de Encosto
+  onder: Restaurant in Trinta
+  tekst: One of the restaurants in Trinta.
+  nog_schrijven: true
+fotos: []

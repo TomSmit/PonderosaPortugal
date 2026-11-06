@@ -1,0 +1,30 @@
+id: bombas
+volgorde: 126
+lat: 40.505868143748856
+lon: -7.359400217136444
+hoofdplek: false
+nl:
+  naam: Bombas
+  onder: Tankstation met een barretje
+  tekst: |-
+    Het tankstation van Trinta heeft ook een barretje. Je drinkt er iets en eet een hapje voordat je weer op pad gaat.
+
+    Ze hebben er ook de betere chorizo's en kazen.
+  nog_schrijven: false
+pt:
+  naam: Bombas
+  onder: Bomba de gasolina com um pequeno bar
+  tekst: |-
+    A bomba de gasolina de Trinta tem também um pequeno bar. Bebe-se qualquer coisa e come-se um petisco antes de seguir caminho.
+
+    Também têm os melhores chouriços e queijos.
+  nog_schrijven: false
+en:
+  naam: Bombas
+  onder: Petrol station with a little bar
+  tekst: |-
+    Trinta's petrol station has a little bar as well, for a drink and a bite before you set off again.
+
+    They also have the better chorizos and cheeses.
+  nog_schrijven: false
+fotos: []

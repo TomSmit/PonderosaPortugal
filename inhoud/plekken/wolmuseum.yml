@@ -1,0 +1,21 @@
+id: wolmuseum
+volgorde: 129
+lat: 40.49421813511771
+lon: -7.358760185570402
+hoofdplek: false
+nl:
+  naam: Het wolmuseum
+  onder: Ten zuiden van Trinta
+  tekst: Een museum over de wol, die hier eeuwenlang langs de rivier werd bewerkt.
+  nog_schrijven: true
+pt:
+  naam: O museu da lã
+  onder: A sul de Trinta
+  tekst: Um museu dedicado à lã, que durante séculos foi trabalhada ao longo do rio.
+  nog_schrijven: true
+en:
+  naam: The wool museum
+  onder: South of Trinta
+  tekst: A museum about wool, which was worked along the river here for centuries.
+  nog_schrijven: true
+fotos: []

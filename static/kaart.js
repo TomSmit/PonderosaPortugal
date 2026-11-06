@@ -16,12 +16,12 @@ const PLACES = [
   { id:"mondego",   lat:40.50985, lon:-7.37330, water:true },
   { id:"albufeira", lat:40.52300, lon:-7.32870, water:true }
 ];
-/* Gebouwen op de quinta, afgeleid van de satellietfoto. Rivierhuis en Pisão iets van de rivier af geschoven, omdat de rivierlijn in OpenStreetMap hier niet precies klopt. b = breedte, d = diepte in meters, hoek in graden. */
+/* Gebouwen op de quinta, afgeleid van de satellietfoto. Rivierhuis en Pisão op de plek die Tom in november 2026 heeft aangegeven. b = breedte, d = diepte in meters, hoek in graden. */
 const QUINTA_BUILDINGS = [
   { naam:"Theater",       lat:40.514346, lon:-7.353098, b:19, d:8,   hoek:23, dak:"grijs" },
   { naam:"Huis van Mirjam", lat:40.513407, lon:-7.351765, b:9,  d:8.5, hoek:-8 },
-  { naam:"Rivierhuis",    lat:40.513427, lon:-7.351547, b:9,  d:6.5, hoek:-8 },
-  { naam:"Pisão",         lat:40.513358, lon:-7.351405, b:9,  d:9,   hoek:-8 },
+  { naam:"Rivierhuis",    lat:40.513629, lon:-7.351982, b:9,  d:6.5, hoek:-8 },
+  { naam:"Pisão",         lat:40.513504, lon:-7.351853, b:9,  d:9,   hoek:-8 },
   { naam:"Buitenkeuken",  lat:40.513307, lon:-7.351667, b:5,  d:4,   hoek:-8, open:true }
 ];
 const SMALL = Math.min(innerWidth, innerHeight) < 600;

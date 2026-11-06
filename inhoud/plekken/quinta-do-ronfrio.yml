@@ -1,0 +1,21 @@
+id: quinta-do-ronfrio
+volgorde: 225
+lat: 40.5210839977865
+lon: -7.332092985219691
+hoofdplek: false
+nl:
+  naam: Quinta do Ronfrio
+  onder: Bij het stuwmeer
+  tekst: Een quinta vlak bij het stuwmeer van het Caldeirão.
+  nog_schrijven: true
+pt:
+  naam: Quinta do Ronfrio
+  onder: Junto à albufeira
+  tekst: Uma quinta perto da albufeira do Caldeirão.
+  nog_schrijven: true
+en:
+  naam: Quinta do Ronfrio
+  onder: Near the reservoir
+  tekst: A quinta close to the Caldeirão reservoir.
+  nog_schrijven: true
+fotos: []

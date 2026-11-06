@@ -1,0 +1,21 @@
+id: cafe-roda
+volgorde: 112
+lat: 40.5036014219185
+lon: -7.354431525806793
+hoofdplek: false
+nl:
+  naam: Cafe Roda
+  onder: Café in Trinta
+  tekst: Een café in Trinta.
+  nog_schrijven: true
+pt:
+  naam: Cafe Roda
+  onder: Café em Trinta
+  tekst: Um café em Trinta.
+  nog_schrijven: true
+en:
+  naam: Cafe Roda
+  onder: Café in Trinta
+  tekst: A café in Trinta.
+  nog_schrijven: true
+fotos: []
