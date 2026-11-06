@@ -6,41 +6,47 @@ hoofdplek: false
 nl:
   naam: Trinta
   onder: Het dorp
-  tekst: |-
+  tekst: >-
     Boven op de helling ligt Trinta. Iedereen kent hier iedereen.
 
-    Hier leer je de mensen kennen die al hun hele leven in de vallei wonen. Een praatje op het plein hoort erbij, ook als je nog geen Portugees spreekt.
+
+    Hier leer je de mensen kennen die al hun hele leven in de vallei wonen. Een
+    praatje op het plein hoort erbij, ook als je nog geen Portugees spreekt.
   nog_schrijven: false
 pt:
   naam: Trinta
   onder: A aldeia
-  tekst: |-
+  tekst: >-
     No alto da encosta fica Trinta. Aqui toda a gente se conhece.
 
-    Aqui os jovens conhecem quem viveu a vida inteira no vale. Uma conversa na praça faz parte, mesmo sem saber ainda falar português.
+
+    Aqui os jovens conhecem quem viveu a vida inteira no vale. Uma conversa na
+    praça faz parte, mesmo sem saber ainda falar português.
   nog_schrijven: false
 en:
   naam: Trinta
   onder: The village
-  tekst: |-
+  tekst: >-
     At the top of the slope lies Trinta. Everyone knows everyone here.
 
-    Here you meet people who have lived in the valley all their lives. A chat on the square is part of it, even if you do not speak Portuguese yet.
+
+    Here you meet people who have lived in the valley all their lives. A chat on
+    the square is part of it, even if you do not speak Portuguese yet.
   nog_schrijven: false
 fotos:
-- bestand: /fotos/trinta/weg-naar-trinta.jpg
-  nl: Over de kinderkopjes naar het dorp
-  pt: Pela calçada até à aldeia
-  en: Along the cobbled road to the village
-- bestand: /fotos/trinta/oogsten.jpg
-  nl: Samen oogsten op het land
-  pt: A colher juntos no campo
-  en: Harvesting together
-- bestand: /fotos/trinta/dansen.jpg
-  nl: Dansen op het dorpsfeest
-  pt: A dançar na festa da aldeia
-  en: Dancing at the village festa
-- bestand: /fotos/trinta/rijst.jpg
-  nl: Een enorme pan rijst voor het feest
-  pt: Um tacho enorme de arroz para a festa
-  en: A huge pan of rice for the festa
+  - bestand: /fotos/trinta/weg-naar-trinta.jpg
+    nl: Over de kinderkopjes naar het dorp
+    pt: Pela calçada até à aldeia
+    en: Along the cobbled road to the village
+  - bestand: /fotos/trinta/oogsten.jpg
+    nl: Samen aardappels oogsten op het land
+    pt: A colher juntos no campo
+    en: Harvesting together
+  - bestand: /fotos/trinta/dansen.jpg
+    nl: Dansen op het dorpsfeest
+    pt: A dançar na festa da aldeia
+    en: Dancing at the village festa
+  - bestand: /fotos/trinta/rijst.jpg
+    nl: Een enorme pan rijst voor het feest
+    pt: Um tacho enorme de arroz para a festa
+    en: A huge pan of rice for the festa
