@@ -133,6 +133,13 @@ let OW=OWB, OH=OW, mPerPx=SX/OW;         // tijdens het scherpe detail tijdelijk
 const overlay=document.createElement("canvas"); overlay.width=OW; overlay.height=OH;
 let ox=overlay.getContext("2d");
 let PAINT_BOX=null;                      // alleen bij het detail: het stuk kaart dat geschilderd wordt
+const BBOX=new WeakMap();
+function inBox(f){                       // ligt een lijn of vlak (deels) in het stuk dat we schilderen?
+  if(!PAINT_BOX) return true;
+  let b=BBOX.get(f);
+  if(!b){ b=[1e9,1e9,-1e9,-1e9]; (Array.isArray(f[0])?f:[f]).forEach(r=>{ for(let i=0;i<r.length;i+=2){ if(r[i]<b[0])b[0]=r[i]; if(r[i]>b[2])b[2]=r[i]; if(r[i+1]<b[1])b[1]=r[i+1]; if(r[i+1]>b[3])b[3]=r[i+1]; } }); BBOX.set(f,b); }
+  return !(b[2]<PAINT_BOX[0]||b[0]>PAINT_BOX[2]||b[3]<PAINT_BOX[1]||b[1]>PAINT_BOX[3]);
+}
 let seed=7; const rnd=()=>{ seed=(seed*16807)%2147483647; return seed/2147483647; };
 function vhash(x,y){ const s=Math.sin(x*127.1+y*311.7)*43758.5453; return s-Math.floor(s); }
 function vnoise(x,y){ const i=Math.floor(x), j=Math.floor(y); let u=x-i, v=y-j; u=u*u*(3-2*u); v=v*v*(3-2*v);
@@ -163,15 +170,15 @@ function wash(name, rgb, alpha, jitM, inkA){
   ox.save();
   for(let p=0;p<3;p++){
     ox.globalAlpha=alpha*(p===0?0.6:0.32); ox.fillStyle="rgb("+rgb+")";
-    L.forEach(poly=>{ polyPath(poly,jit*(0.6+p*0.5),p*17.3); ox.fill("evenodd"); });
+    L.forEach(poly=>{ if(!inBox(poly)) return; polyPath(poly,jit*(0.6+p*0.5),p*17.3); ox.fill("evenodd"); });
   }
   const dark=rgb.split(",").map(v=>Math.round(v*0.72)).join(",");
   const lw=Math.sqrt(OW/OWB);
   ox.globalAlpha=alpha*0.6; ox.strokeStyle="rgb("+dark+")"; ox.lineWidth=2*lw; ox.lineJoin="round";
-  L.forEach(poly=>{ polyPath(poly,jit*0.6,0); ox.stroke(); });
+  L.forEach(poly=>{ if(!inBox(poly)) return; polyPath(poly,jit*0.6,0); ox.stroke(); });
   if(inkA){ // fijne inktlijn om het veld, net niet precies op de verfrand
     ox.globalAlpha=inkA; ox.strokeStyle="rgb(52,40,32)"; ox.lineWidth=1.3*lw;
-    L.forEach(poly=>{ polyPath(poly,jit*0.9,31); ox.stroke(); });
+    L.forEach(poly=>{ if(!inBox(poly)) return; polyPath(poly,jit*0.9,31); ox.stroke(); });
   }
   ox.restore();
 }
@@ -181,12 +188,12 @@ function line(name, color, widthM, opts={}){
   if(opts.alpha!=null) ox.globalAlpha=opts.alpha;
   if(opts.dash) ox.setLineDash(opts.dash.map(d=>d/mPerPx));
   if(opts.dx) ox.translate(opts.dx,opts.dy);
-  L.forEach(l=>{ if(opts.jit){ wobblePath(l,false,opts.jit/mPerPx,opts.phase||0); } else { ox.beginPath(); for(let i=0;i<l.length;i+=2){ const x=l[i]*OW,y=l[i+1]*OH; i?ox.lineTo(x,y):ox.moveTo(x,y);} } ox.stroke(); });
+  L.forEach(l=>{ if(!inBox(l)) return; if(opts.jit){ wobblePath(l,false,opts.jit/mPerPx,opts.phase||0); } else { ox.beginPath(); for(let i=0;i<l.length;i+=2){ const x=l[i]*OW,y=l[i+1]*OH; i?ox.lineTo(x,y):ox.moveTo(x,y);} } ox.stroke(); });
   ox.restore();
 }
 function fill(name, color, dx=0, dy=0, poly=false){
   ox.save(); ox.fillStyle=color; ox.translate(dx,dy);
-  (V.layers[name]||[]).forEach(l=>{ if(poly){ polyPath(l,0,0); ox.fill("evenodd"); } else { ox.beginPath(); for(let i=0;i<l.length;i+=2){ const x=l[i]*OW,y=l[i+1]*OH; i?ox.lineTo(x,y):ox.moveTo(x,y);} ox.closePath(); ox.fill(); } });
+  (V.layers[name]||[]).forEach(l=>{ if(!inBox(l)) return; if(poly){ polyPath(l,0,0); ox.fill("evenodd"); } else { ox.beginPath(); for(let i=0;i<l.length;i+=2){ const x=l[i]*OW,y=l[i+1]*OH; i?ox.lineTo(x,y):ox.moveTo(x,y);} ox.closePath(); ox.fill(); } });
   ox.restore();
 }
 
@@ -277,6 +284,7 @@ function paintOverlay(){
   // akkers krijgen een paar voren, zoals met potlood ingetekend
   ox.save(); ox.strokeStyle="rgba(170,120,40,0.35)"; ox.lineWidth=1;
   (V.layers.farm||[]).forEach(poly=>{
+    if(!inBox(poly)) return;
     ox.save(); polyPath(poly,0,0); ox.clip("evenodd");
     const r=poly[0]; let mx=1,my=1,Mx=0,My=0; for(let i=0;i<r.length;i+=2){ mx=Math.min(mx,r[i]);Mx=Math.max(Mx,r[i]);my=Math.min(my,r[i+1]);My=Math.max(My,r[i+1]); }
     const ang=vhash(mx*99,my*99)*Math.PI, ca=Math.cos(ang), sa=Math.sin(ang), cx=(mx+Mx)/2*OW, cy=(my+My)/2*OH, ext=Math.max(Mx-mx,My-my)*OW;
@@ -761,7 +769,7 @@ $("#credit-i").addEventListener("click",()=>creditOpen(!$("#credit").classList.c
 function setupInput(){
   const el=$("#gl"); const pts=new Map(); let pinch=null;
   el.addEventListener("pointerdown",()=>creditOpen(false),{once:true}); el.addEventListener("wheel",()=>creditOpen(false),{once:true,passive:true});
-  el.addEventListener("pointerdown",e=>{ el.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY,b:e.button}); goal=null; el.classList.add("grab"); });
+  el.addEventListener("pointerdown",e=>{ dragging=true; el.setPointerCapture(e.pointerId); pts.set(e.pointerId,{x:e.clientX,y:e.clientY,b:e.button}); goal=null; el.classList.add("grab"); });
   el.addEventListener("pointermove",e=>{
     if(!pts.has(e.pointerId)){ hoverQueued=e; return; }
     const prev=pts.get(e.pointerId); const dx=e.clientX-prev.x, dy=e.clientY-prev.y;
@@ -778,6 +786,7 @@ function setupInput(){
   });
   const up=e=>{ pts.delete(e.pointerId); pinch=null; if(!pts.size) el.classList.remove("grab"); };
   el.addEventListener("pointerup",up); el.addEventListener("pointercancel",up);
+  const stop=()=>{ if(!pts.size) dragging=false; }; el.addEventListener("pointerup",stop); el.addEventListener("pointercancel",stop);
   el.addEventListener("contextmenu",e=>e.preventDefault());
   el.addEventListener("wheel",e=>{ e.preventDefault(); goal=null; cam.dist*=Math.exp(e.deltaY*0.0012); clampCam(); need(); },{passive:false});
   function pan(dx,dy){
@@ -958,8 +967,8 @@ const ease=t=>t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
 /* ================= scherp detail bij inzoomen =================
    De hele kaart is als één schilderij op het terrein gelegd. Van dichtbij wordt dat korrelig,
    dus schilderen we het stuk waar je naar kijkt nog eens, veel fijner, zodra de camera stilstaat. */
-const DS=SMALL?2048:3072;
-let detailCanvas=null, detailTex=null, detailKey=null, detailTimer=0;
+const DS=2048;
+let detailCanvas=null, detailTex=null, detailKey=null, detailTimer=0, dragging=false;
 function paintDetail(cx, cy, span){
   if(!detailCanvas){ detailCanvas=document.createElement("canvas"); detailCanvas.width=DS; detailCanvas.height=DS; }
   const fx0=cx-span/2, fy0=cy-span/2, keep=[OW,OH,mPerPx,ox];
@@ -977,16 +986,17 @@ function paintDetail(cx, cy, span){
 }
 function detailWanted(){
   if(cam.dist>(SMALL?3200:2800)) return null;
-  const spanM=Math.min(Math.max(cam.dist*2.3, 520), 4200), ahead=spanM*0.22;
-  return [ (cam.tx-Math.sin(cam.az)*ahead)/SX+0.5, (cam.tz-Math.cos(cam.az)*ahead)/SZ+0.5, spanM/SX ];
+  // rond het punt waar je naar kijkt, ruim genoeg om te kunnen draaien zonder opnieuw te schilderen
+  const spanM=Math.min(Math.max(cam.dist*3.0, 700), 5000);
+  return [ cam.tx/SX+0.5, cam.tz/SZ+0.5, spanM/SX ];
 }
 function maybeDetail(){
   const w=detailWanted();
   if(!w){ if(terrainMat.uniforms.uDRect.value.w>0){ terrainMat.uniforms.uDRect.value.w=0; detailKey=null; need(); } clearTimeout(detailTimer); return; }
   const k=detailKey;
-  if(k && Math.hypot(w[0]-k[0], w[1]-k[1])<k[2]*0.16 && w[2]/k[2]>0.72 && w[2]/k[2]<1.35) return;
+  if(k && Math.hypot(w[0]-k[0], w[1]-k[1])<k[2]*0.22 && w[2]/k[2]>0.6 && w[2]/k[2]<1.5) return;
   clearTimeout(detailTimer);
-  detailTimer=setTimeout(()=>{ const v=detailWanted(); if(v && !goal) paintDetail(v[0],v[1],v[2]); else if(v) maybeDetail(); }, 300);
+  detailTimer=setTimeout(()=>{ const v=detailWanted(); if(v && !goal && !dragging) paintDetail(v[0],v[1],v[2]); else if(v) maybeDetail(); }, 650);
 }
 
 function frame(now){
