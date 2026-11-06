@@ -128,9 +128,11 @@ const places = PLACES.map(s=>{
 });
 
 /* ================= aquarel op de ondergrond ================= */
-const OW=SMALL?2048:3072, OH=OW, mPerPx=SX/OW;
+const OWB=SMALL?2048:3072;              // de hele kaart op dit formaat geschilderd
+let OW=OWB, OH=OW, mPerPx=SX/OW;         // tijdens het scherpe detail tijdelijk groter
 const overlay=document.createElement("canvas"); overlay.width=OW; overlay.height=OH;
-const ox=overlay.getContext("2d");
+let ox=overlay.getContext("2d");
+let PAINT_BOX=null;                      // alleen bij het detail: het stuk kaart dat geschilderd wordt
 let seed=7; const rnd=()=>{ seed=(seed*16807)%2147483647; return seed/2147483647; };
 function vhash(x,y){ const s=Math.sin(x*127.1+y*311.7)*43758.5453; return s-Math.floor(s); }
 function vnoise(x,y){ const i=Math.floor(x), j=Math.floor(y); let u=x-i, v=y-j; u=u*u*(3-2*u); v=v*v*(3-2*v);
@@ -139,10 +141,10 @@ function wobblePath(flat, close, jitPx, phase, keep){
   // lijnen opdelen en licht laten golven, zoals een penseel dat nooit precies de lijn volgt
   if(!keep) ox.beginPath();
   const n=flat.length/2; let first=true;
-  const f=0.035;
+  const sc=OW/OWB, f=0.035/sc;           // golfjes en stapjes in vaste kaartmaat, zodat detail en overzicht gelijk lopen
   for(let i=0;i<n-(close?0:1);i++){
     const ax=flat[i*2]*OW, ay=flat[i*2+1]*OH, j=(i+1)%n, bx=flat[j*2]*OW, by=flat[j*2+1]*OH;
-    const len=Math.hypot(bx-ax,by-ay), seg=Math.max(1,Math.ceil(len/7));
+    const len=Math.hypot(bx-ax,by-ay), seg=Math.max(1,Math.ceil(len/(7*Math.min(sc,2.5))));
     for(let s=0;s<seg;s++){
       const t=s/seg, x=ax+(bx-ax)*t, y=ay+(by-ay)*t;
       const wx=x+(vnoise(x*f+phase,y*f)-.5)*2*jitPx, wy=y+(vnoise(x*f,y*f+phase+50)-.5)*2*jitPx;
@@ -164,10 +166,11 @@ function wash(name, rgb, alpha, jitM, inkA){
     L.forEach(poly=>{ polyPath(poly,jit*(0.6+p*0.5),p*17.3); ox.fill("evenodd"); });
   }
   const dark=rgb.split(",").map(v=>Math.round(v*0.72)).join(",");
-  ox.globalAlpha=alpha*0.6; ox.strokeStyle="rgb("+dark+")"; ox.lineWidth=2; ox.lineJoin="round";
+  const lw=Math.sqrt(OW/OWB);
+  ox.globalAlpha=alpha*0.6; ox.strokeStyle="rgb("+dark+")"; ox.lineWidth=2*lw; ox.lineJoin="round";
   L.forEach(poly=>{ polyPath(poly,jit*0.6,0); ox.stroke(); });
   if(inkA){ // fijne inktlijn om het veld, net niet precies op de verfrand
-    ox.globalAlpha=inkA; ox.strokeStyle="rgb(52,40,32)"; ox.lineWidth=1.3;
+    ox.globalAlpha=inkA; ox.strokeStyle="rgb(52,40,32)"; ox.lineWidth=1.3*lw;
     L.forEach(poly=>{ polyPath(poly,jit*0.9,31); ox.stroke(); });
   }
   ox.restore();
@@ -284,7 +287,7 @@ function paintOverlay(){
   // schaduw van bomen en struiken op de grond
   const sx=-SUNH[0], sz=-SUNH[1];
   ox.save(); ox.fillStyle="rgba(80,70,150,0.22)";
-  const dab=(p,r,hgt)=>{ const off=hgt/TANE/mPerPx; ox.beginPath(); ox.ellipse(p[0]*OW+sx*off, p[1]*OH+sz*off, Math.max(r/mPerPx*1.15,0.8), Math.max(r/mPerPx*0.9,0.6), 0, 0, Math.PI*2); ox.fill(); };
+  const dab=(p,r,hgt)=>{ if(PAINT_BOX && (p[0]<PAINT_BOX[0]||p[0]>PAINT_BOX[2]||p[1]<PAINT_BOX[1]||p[1]>PAINT_BOX[3])) return; const off=hgt/TANE/mPerPx; ox.beginPath(); ox.ellipse(p[0]*OW+sx*off, p[1]*OH+sz*off, Math.max(r/mPerPx*1.15,0.8), Math.max(r/mPerPx*0.9,0.6), 0, 0, Math.PI*2); ox.fill(); };
   TREES.forEach(p=>dab(p, 4.5+p[2]*2.5, 11));
   BUSHES.forEach(p=>dab(p, 2.5+p[2]*1.5, 3));
   ox.restore();
@@ -372,7 +375,7 @@ void main(){
 }`;
 const TERRAIN_FS=`
 precision highp float;
-uniform sampler2D uMap; uniform float uStep, uBase;
+uniform sampler2D uMap; uniform sampler2D uDetail; uniform vec4 uDRect; uniform float uStep, uBase;
 varying vec3 vPos; varying vec3 vN; varying vec2 vUv; varying float vH; varying float vSide; varying float vTop;
 ${NOISE}
 ${LIGHTING}
@@ -408,6 +411,13 @@ void main(){
   float dotm=(1.0-smoothstep(0.55,0.55+pxw,dd))*step(0.55,hash(cell+9.1))*(1.0-smoothstep(0.6,1.6,pxw));
   col=mix(col, col*vec3(0.55,0.68,0.42), dotm*0.85);
   vec4 ov=texture2D(uMap, vUv);
+  if(uDRect.w>0.5){ // scherp detail rond de plek waar je naar kijkt
+    vec2 du=(vUv-uDRect.xy)/uDRect.z;
+    if(du.x>0.0 && du.y>0.0 && du.x<1.0 && du.y<1.0){
+      float fe=smoothstep(0.0,0.07,min(min(du.x,du.y),min(1.0-du.x,1.0-du.y)));
+      ov=mix(ov, texture2D(uDetail,du), fe);
+    }
+  }
   col=mix(col, ov.rgb, ov.a);
   col=paint(col, lam, lb.r, lb.g, vPos);
   gl_FragColor=vec4(col,1.0);
@@ -706,7 +716,7 @@ function buildScene(){
 
   terrainMat=new THREE.ShaderMaterial({
     vertexShader:TERRAIN_VS, fragmentShader:TERRAIN_FS,
-    uniforms:Object.assign(sharedUniforms(), { uMap:{value:tex}, uStep:{value:STEP}, uExag:{value:EXAG}, uBase:{value:BASE} }),
+    uniforms:Object.assign(sharedUniforms(), { uMap:{value:tex}, uDetail:{value:tex}, uDRect:{value:new THREE.Vector4(0,0,1,0)}, uStep:{value:STEP}, uExag:{value:EXAG}, uBase:{value:BASE} }),
     extensions:{derivatives:true}
   });
   setupInk();
@@ -945,6 +955,40 @@ function paintSky(){
 /* ================= start ================= */
 function resize(){ if(!renderer) return; renderer.setSize(innerWidth,innerHeight,false); camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix(); sizeInk(); paintSky(); need(); }
 const ease=t=>t<0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+/* ================= scherp detail bij inzoomen =================
+   De hele kaart is als één schilderij op het terrein gelegd. Van dichtbij wordt dat korrelig,
+   dus schilderen we het stuk waar je naar kijkt nog eens, veel fijner, zodra de camera stilstaat. */
+const DS=SMALL?2048:3072;
+let detailCanvas=null, detailTex=null, detailKey=null, detailTimer=0;
+function paintDetail(cx, cy, span){
+  if(!detailCanvas){ detailCanvas=document.createElement("canvas"); detailCanvas.width=DS; detailCanvas.height=DS; }
+  const fx0=cx-span/2, fy0=cy-span/2, keep=[OW,OH,mPerPx,ox];
+  OW=OH=DS/span; mPerPx=SX/OW; ox=detailCanvas.getContext("2d");
+  PAINT_BOX=[fx0-0.004, fy0-0.004, fx0+span+0.004, fy0+span+0.004];
+  ox.setTransform(1,0,0,1,0,0); ox.clearRect(0,0,DS,DS); ox.setTransform(1,0,0,1,-fx0*OW,-fy0*OH);
+  try{ paintOverlay(); } finally { ox.setTransform(1,0,0,1,0,0); [OW,OH,mPerPx,ox]=keep; PAINT_BOX=null; }
+  if(!detailTex){
+    detailTex=new THREE.CanvasTexture(detailCanvas); detailTex.flipY=false;
+    detailTex.anisotropy=renderer.capabilities.getMaxAnisotropy(); detailTex.minFilter=THREE.LinearMipmapLinearFilter;
+    terrainMat.uniforms.uDetail.value=detailTex;
+  } else detailTex.needsUpdate=true;
+  terrainMat.uniforms.uDRect.value.set(fx0, fy0, span, 1);
+  detailKey=[cx, cy, span]; need();
+}
+function detailWanted(){
+  if(cam.dist>(SMALL?3200:2800)) return null;
+  const spanM=Math.min(Math.max(cam.dist*2.3, 520), 4200), ahead=spanM*0.22;
+  return [ (cam.tx-Math.sin(cam.az)*ahead)/SX+0.5, (cam.tz-Math.cos(cam.az)*ahead)/SZ+0.5, spanM/SX ];
+}
+function maybeDetail(){
+  const w=detailWanted();
+  if(!w){ if(terrainMat.uniforms.uDRect.value.w>0){ terrainMat.uniforms.uDRect.value.w=0; detailKey=null; need(); } clearTimeout(detailTimer); return; }
+  const k=detailKey;
+  if(k && Math.hypot(w[0]-k[0], w[1]-k[1])<k[2]*0.16 && w[2]/k[2]>0.72 && w[2]/k[2]<1.35) return;
+  clearTimeout(detailTimer);
+  detailTimer=setTimeout(()=>{ const v=detailWanted(); if(v && !goal) paintDetail(v[0],v[1],v[2]); else if(v) maybeDetail(); }, 300);
+}
+
 function frame(now){
   requestAnimationFrame(frame);
   if(goal){
@@ -954,7 +998,7 @@ function frame(now){
   }
   doHover();
   if(!dirty) return; dirty=false;
-  applyCam(); renderAll(); placeLabels();
+  applyCam(); renderAll(); placeLabels(); maybeDetail();
 }
 function start(){
   applyText();
