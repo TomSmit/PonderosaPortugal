@@ -18,7 +18,7 @@ const PLACES = [
 ];
 /* Gebouwen op de quinta, afgeleid van de satellietfoto. Rivierhuis en Pisão op de plek die Tom in november 2026 heeft aangegeven. b = breedte, d = diepte in meters, hoek in graden. */
 const QUINTA_BUILDINGS = [
-  { naam:"Theater",       lat:40.514346, lon:-7.353098, b:19, d:8,   hoek:23, dak:"grijs" },
+  { naam:"Theater",       lat:40.514346, lon:-7.353098, b:19, d:8,   hoek:23, soort:"theater" },
   { naam:"Huis van Mirjam", lat:40.513407, lon:-7.351765, b:9,  d:8.5, hoek:-8 },
   { naam:"Rivierhuis",    lat:40.513629, lon:-7.351982, b:9,  d:6.5, hoek:-8 },
   { naam:"Pisão",         lat:40.513504, lon:-7.351853, b:9,  d:9,   hoek:-8 },
@@ -320,6 +320,7 @@ function paintOverlay(){
   line("boardwalk", "rgba(110,70,36,0.8)", 4.8, {dash:[0.6,1.6]});
   // schaduw van huizen
   fill("building","rgba(80,70,150,0.28)", sx*9/TANE/mPerPx, sz*9/TANE/mPerPx);
+  fill("industrie","rgba(80,70,150,0.28)", sx*11/TANE/mPerPx, sz*11/TANE/mPerPx);
   ox.save(); ox.fillStyle="rgba(80,70,150,0.26)";
   VILLAGE_HOUSES.forEach(h=>{ const off=(h.h+2)/TANE/mPerPx; ox.save(); ox.translate((h.x/SX+0.5)*OW+sx*off, (h.z/SZ+0.5)*OH+sz*off); ox.rotate(h.ang); ox.fillRect(-h.w/2/mPerPx,-h.d/2/mPerPx,h.w/mPerPx,h.d/mPerPx); ox.restore(); });
   ox.restore();
@@ -587,8 +588,42 @@ function buildHouses(){
   }
   (V.layers.building||[]).forEach(l=>house(l,false));
   (V.layers.ruin||[]).forEach(l=>house(l,true));
+  (V.layers.industrie||[]).forEach(l=>house(l,false,{roof:[0.70,0.71,0.73], wall:[0.88,0.87,0.84], h:9}));
   // de gebouwen van de quinta, naar de satellietfoto
+  /* het theater: houten skelet, wanden van stro en leem, een steil puntdak met houten dakspanen */
+  function theater(b){
+    const [cx,cy]=frac(b.lat,b.lon), a=(b.hoek||0)*Math.PI/180, c=Math.cos(a), s=Math.sin(a);
+    const X0=(cx-0.5)*SX, Z0=(cy-0.5)*SZ, L2=b.b/2, W2=b.d/2;
+    const pt=(x,z,y)=>[X0+x*c-z*s, y, Z0+x*s+z*c];
+    let g0=Infinity; [[-1,-1],[1,-1],[1,1],[-1,1]].forEach(([i,j])=>{ const q=pt(i*L2,j*W2,0); g0=Math.min(g0,yAt(q[0]/SX+0.5,q[2]/SZ+0.5)); });
+    const y0=g0-2, hw=2.3, y1=g0+hw, yr=y1+W2*1.25;          // lage wanden, steil dak
+    const quad=(p1,p2,p3,p4,col)=>{ push(p1,p2,p3,col); push(p1,p3,p4,col); };
+    const box=(x,z,w,d,ya,yb,col)=>{ const A=pt(x-w,z-d,ya),B=pt(x+w,z-d,ya),C=pt(x+w,z+d,ya),D=pt(x-w,z+d,ya),A1=pt(x-w,z-d,yb),B1=pt(x+w,z-d,yb),C1=pt(x+w,z+d,yb),D1=pt(x-w,z+d,yb);
+      quad(A,B,B1,A1,col); quad(B,C,C1,B1,col); quad(C,D,D1,C1,col); quad(D,A,A1,D1,col); quad(A1,B1,C1,D1,col); };
+    const LEEM=[0.84,0.70,0.50], PLANK=[0.66,0.47,0.29], PAAL=[0.40,0.27,0.16];
+    // wanden van stro en leem langs de lange zijden, planken in de puntgevels
+    quad(pt(-L2,-W2,y0),pt(L2,-W2,y0),pt(L2,-W2,y1),pt(-L2,-W2,y1),LEEM);
+    quad(pt(-L2,W2,y0),pt(L2,W2,y0),pt(L2,W2,y1),pt(-L2,W2,y1),LEEM);
+    [-L2,L2].forEach(x=>{ quad(pt(x,-W2,y0),pt(x,W2,y0),pt(x,W2,y1),pt(x,-W2,y1),PLANK); push(pt(x,-W2,y1),pt(x,W2,y1),pt(x,0,yr),PLANK); });
+    // houten palen, net buiten de wand
+    for(let x=-L2; x<=L2+0.01; x+=b.b/6) [-1,1].forEach(sd=>box(x, sd*(W2+0.12), 0.18, 0.18, y0, y1+0.1, PAAL));
+    // dakvlakken in banen van dakspanen, elke baan een stukje over de vorige
+    const ov=0.9, og=0.7, rows=8;
+    [-1,1].forEach(sd=>{
+      for(let i=0;i<rows;i++){
+        const t0=i/rows, t1=(i+1)/rows;
+        const z0=sd*(W2+ov)*(1-t0), z1=sd*(W2+ov)*(1-t1);
+        const e0=y1-ov*0.8, ya=e0+(yr-e0)*t0, yb=e0+(yr-e0)*t1;
+        const lift=0.12, k=0.55+0.1*Math.sin(i*2.1+sd);
+        const col=[k*1.18, k*0.86, k*0.56];
+        quad(pt(-L2-og,z0+sd*0.05,ya-lift),pt(L2+og,z0+sd*0.05,ya-lift),pt(L2+og,z1,yb),pt(-L2-og,z1,yb),col);
+        quad(pt(-L2-og,z0+sd*0.05,ya-lift),pt(L2+og,z0+sd*0.05,ya-lift),pt(L2+og,z0,ya+0.02),pt(-L2-og,z0,ya+0.02),[col[0]*0.7,col[1]*0.7,col[2]*0.7]);
+      }
+    });
+    box(0,0,L2+og,0.22,yr-0.05,yr+0.22,[0.48,0.33,0.20]);       // nokbalk
+  }
   QUINTA_BUILDINGS.forEach(b=>{
+    if(b.soort==="theater") return theater(b);
     const [cx,cy]=frac(b.lat,b.lon), a=(b.hoek||0)*Math.PI/180, c=Math.cos(a), s=Math.sin(a), out=[];
     [[-b.b/2,-b.d/2],[b.b/2,-b.d/2],[b.b/2,b.d/2],[-b.b/2,b.d/2]].forEach(([x,z])=>{ out.push(cx+(x*c-z*s)/SX, cy+(x*s+z*c)/SZ); });
     house(out,false, b.dak==="grijs" ? {roof:[0.62,0.62,0.66], h:8} : b.open ? {roof:[0.62,0.44,0.28], wall:[0.72,0.55,0.38], h:3.5} : {});

@@ -243,6 +243,7 @@ def bouw_kaart(L):
 <script>window.ROOT={json.dumps(root)};window.KAART={json.dumps(data, ensure_ascii=False)};window.PUNTEN={json.dumps(punten, ensure_ascii=False)};</script>
 <script src="{root}assets/three.min.js"></script>
 <script src="{root}assets/vallei-data.js"></script>
+<script src="{root}assets/correcties.js"></script>
 <script src="{root}assets/kaart.js"></script>
 </body>
 </html>
