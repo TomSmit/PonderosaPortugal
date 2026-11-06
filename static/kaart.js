@@ -246,7 +246,9 @@ function fillVillage(lat, lon, s0){
 }
 function placeTrees(){
   VILLAGE_HOUSES=[]; fillVillage(40.5038,-7.35498, 61);
+  (window.DORPEN_VULLEN||[]).forEach(([la,lo],i)=>fillVillage(la, lo, 101+i*17));
   TREES=scatter(maskOf(["wood"]), SMALL?20:13, SMALL?12000:48000, 3);
+  seed=19; (window.EXTRA_BOMEN||[]).forEach(([fx,fy])=>{ if(inCircle(fx,fy,0.995)) TREES.push([fx,fy,rnd(),rnd()]); });
   const clear=QUINTA_BUILDINGS.map(b=>{ const f=frac(b.lat,b.lon); return [f[0],f[1],Math.max(b.b,b.d)*0.7+7]; });
   TREES=TREES.filter(p=>clear.every(([x,y,r])=>Math.hypot((p[0]-x)*SX,(p[1]-y)*SZ)>r));
   TREES=TREES.filter(p=>{ const x=(p[0]-0.5)*SX, z=(p[1]-0.5)*SZ; return VILLAGE_HOUSES.every(h=>Math.hypot(h.x-x,h.z-z)>h.r+4); });
@@ -537,36 +539,54 @@ function objMaterial(instanced){
     extensions:{derivatives:true}, side: instanced ? THREE.FrontSide : THREE.DoubleSide });
 }
 function buildTrees(){
-  // lollipopboompjes met stammetje, dennen als puntmutsen
-  const round=new THREE.IcosahedronGeometry(1,1);
-  const cone=new THREE.ConeGeometry(1,1,7); cone.translate(0,0.5,0);
-  const trunk=new THREE.CylinderGeometry(0.5,0.65,1,5); trunk.translate(0,0.5,0);
-  const roundPal=[[0.36,0.63,0.22],[0.50,0.73,0.24],[0.27,0.52,0.22],[0.62,0.77,0.27],[0.42,0.60,0.19],[0.70,0.74,0.26]];
-  const pinePal=[[0.16,0.42,0.29],[0.21,0.49,0.31],[0.19,0.38,0.25]];
-  const bushPal=[[0.62,0.74,0.30],[0.52,0.68,0.27],[0.74,0.72,0.33]];
-  const rounds=[], pines=[];
-  TREES.forEach(p=> (p[3]<0.33 ? pines : rounds).push(p));
+  // kastanjes met een kruin van een paar losse bollen, hier en daar een den
+  function merge(parts){
+    const out=[];
+    parts.forEach(([geo,dx,dy,dz,sx,sy,sz])=>{
+      const g=geo.index ? geo.toNonIndexed() : geo, a=g.attributes.position.array;
+      for(let i=0;i<a.length;i+=3) out.push(a[i]*sx+dx, a[i+1]*sy+dy, a[i+2]*sz+dz);
+    });
+    const g=new THREE.BufferGeometry(); g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(out),3)); return g;
+  }
+  const ico1=new THREE.IcosahedronGeometry(1,1), ico0=new THREE.IcosahedronGeometry(1,0);
+  const blob=(d,x,y,z,r)=>[d?ico1:ico0, x,y,z, r,r*0.88,r];
+  const crowns=[
+    merge([blob(1,0,0,0,1), blob(0,0.58,-0.18,0.22,0.62), blob(0,-0.5,-0.22,-0.3,0.6)]),
+    merge([blob(1,0,0.08,0,0.9), blob(0,0.52,-0.25,-0.36,0.64), blob(0,-0.34,-0.3,0.5,0.6), blob(0,0.06,0.46,0.1,0.52)]),
+    merge([blob(1,0,0,0,1.04), blob(0,-0.62,-0.12,0.1,0.56), blob(0,0.3,-0.35,-0.55,0.45)])
+  ];
+  const cone=new THREE.ConeGeometry(1,1,7);
+  const pineGeo=merge([[cone,0,0.32,0,1,0.64,1],[cone,0,0.68,0,0.68,0.6,0.68]]);
+  const trunk=new THREE.CylinderGeometry(0.42,0.62,1,6); trunk.translate(0,0.5,0);
+  const kastanje=[[0.36,0.58,0.20],[0.44,0.65,0.22],[0.30,0.50,0.18],[0.50,0.68,0.24],[0.40,0.56,0.17],[0.56,0.70,0.26],[0.33,0.54,0.24]];
+  const pinePal=[[0.16,0.40,0.28],[0.20,0.46,0.30],[0.18,0.36,0.24]];
+  const bushPal=[[0.62,0.74,0.30],[0.52,0.68,0.27],[0.74,0.72,0.33],[0.58,0.66,0.28]];
+  const BREM=[0.90,0.78,0.26], HEIDE=[0.66,0.44,0.60];
+  const pines=[], groups=[[],[],[]];
+  TREES.forEach(p=>{ if(p[3]<0.15) pines.push(p); else groups[Math.floor((p[3]-0.15)/0.85*2.999)].push(p); });
   const m4=new THREE.Matrix4(), q=new THREE.Quaternion(), e=new THREE.Euler(), s=new THREE.Vector3(), v=new THREE.Vector3();
-  function make(geo, list, pal, kind){
+  function make(geo, list, pick, place){
+    if(!list.length) return;
     const mesh=new THREE.InstancedMesh(geo, objMaterial(true), list.length);
     const tint=new Float32Array(list.length*3);
     list.forEach((p,i)=>{
       const [x,y,z]=toWorld(p[0],p[1]); const r=p[2];
-      if(kind==="pine"){ const rad=2.8+r*1.6; s.set(rad, rad*3.6, rad); v.set(x,y-1,z); }
-      else if(kind==="bush"){ const rad=1.8+r*1.4; s.set(rad*1.2, rad*0.85, rad*1.2); v.set(x,y+rad*0.4,z); }
-      else if(kind==="trunk"){ const rad=4.2+r*2.6; s.set(rad*0.16, 3.2+rad*0.4, rad*0.16); v.set(x,y-1,z); }
-      else { const rad=4.2+r*2.6; s.set(rad, rad*1.05, rad); v.set(x,y+2.2+rad*0.4+rad,z); }
-      e.set(0, r*6.28, 0); q.setFromEuler(e); m4.compose(v,q,s); mesh.setMatrixAt(i,m4);
-      const c=pal[Math.floor(r*977)%pal.length], jit=0.92+((r*7919)%1)*0.16;
-      tint.set([c[0]*jit,c[1]*jit,c[2]*jit], i*3);
+      place(x,y,z,r,p); e.set(0, r*6.28+p[3]*3.1, 0); q.setFromEuler(e); m4.compose(v,q,s); mesh.setMatrixAt(i,m4);
+      const c=pick(r,p), jit=0.88+((r*7919)%1)*0.24, warm=((r*3571)%1-0.5)*0.08;
+      tint.set([c[0]*jit+warm, c[1]*jit+warm*0.4, c[2]*jit-warm*0.3], i*3);
     });
     geo.setAttribute("aTint", new THREE.InstancedBufferAttribute(tint,3));
     mesh.frustumCulled=false; scene.add(mesh);
   }
-  make(round, rounds, roundPal, "round");
-  make(trunk, rounds, [[0.48,0.31,0.19],[0.42,0.27,0.17]], "trunk");
-  make(cone, pines, pinePal, "pine");
-  make(new THREE.IcosahedronGeometry(1,0), BUSHES, bushPal, "bush");
+  const rad=r=>4.0+r*3.0;
+  groups.forEach((list,k)=>{
+    make(crowns[k], list, r=>kastanje[Math.floor(r*977)%kastanje.length], (x,y,z,r)=>{ const R=rad(r); s.set(R*1.08,R,R*1.08); v.set(x,y+2.6+R*0.35+R*0.85,z); });
+    make(trunk.clone(), list, r=>(r>0.5?[0.44,0.30,0.19]:[0.38,0.26,0.17]), (x,y,z,r)=>{ const R=rad(r); s.set(R*0.19, 3.0+R*0.45, R*0.19); v.set(x,y-1,z); });
+  });
+  make(pineGeo, pines, r=>pinePal[Math.floor(r*977)%pinePal.length], (x,y,z,r)=>{ const R=2.6+r*1.6; s.set(R, R*4.2, R); v.set(x,y-1,z); });
+  make(trunk.clone(), pines, ()=>[0.40,0.27,0.17], (x,y,z,r)=>{ const R=2.6+r*1.6; s.set(R*0.16, 3+R*0.5, R*0.16); v.set(x,y-1,z); });
+  make(ico0, BUSHES, (r,p)=> p[3]<0.06 ? BREM : p[3]<0.09 ? HEIDE : bushPal[Math.floor(r*977)%bushPal.length],
+       (x,y,z,r)=>{ const R=1.8+r*1.4; s.set(R*1.2, R*0.85, R*1.2); v.set(x,y+R*0.4,z); });
 }
 function buildHouses(){
   const P=[], C=[];
