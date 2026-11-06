@@ -1,0 +1,22 @@
+id: pad-naar-de-quinta
+volgorde: 105
+lat: 40.50776624279232
+lon: -7.355692412927521
+hoofdplek: false
+nl:
+  naam: Pad naar de Quinta
+  onder: Te voet van Trinta naar beneden
+  tekst: Aan het eind van Trinta begint het pad naar beneden. Het slingert ruim een kilometer langs de helling, tot het bij de quinta uitkomt. Op de kaart zie je het als een oranje stippellijn.
+  nog_schrijven: false
+pt:
+  naam: Caminho para a Quinta
+  onder: A pé, de Trinta até lá abaixo
+  tekst: No fim de Trinta começa o caminho que desce. Serpenteia por pouco mais de um quilómetro pela encosta, até chegar à quinta. No mapa é a linha tracejada cor de laranja.
+  nog_schrijven: false
+en:
+  naam: Path to the Quinta
+  onder: On foot from Trinta down the hill
+  tekst: At the end of Trinta the path down begins. It winds for just over a kilometre along the slope until it comes out at the quinta. On the map it is the dotted orange line.
+  nog_schrijven: false
+video: /fotos/pad-naar-de-quinta/pad.mp4
+fotos: []

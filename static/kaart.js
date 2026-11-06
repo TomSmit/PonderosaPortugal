@@ -264,6 +264,11 @@ function placeTrees(){
   const clear=QUINTA_BUILDINGS.map(b=>{ const f=frac(b.lat,b.lon); return [f[0],f[1],Math.max(b.b,b.d)*0.7+7]; });
   TREES=TREES.filter(p=>clear.every(([x,y,r])=>Math.hypot((p[0]-x)*SX,(p[1]-y)*SZ)>r));
   TREES=TREES.filter(p=>{ const x=(p[0]-0.5)*SX, z=(p[1]-0.5)*SZ; return VILLAGE_HOUSES.every(h=>Math.hypot(h.x-x,h.z-z)>h.r+4); });
+  // langs het pad naar de quinta een smalle open strook, zodat je het pad door het bos ziet lopen
+  const padPts=[]; (V.layers.pad_quinta||[]).forEach(l=>{ for(let i=0;i<l.length-2;i+=2){ const ax=l[i]*SX, ay=l[i+1]*SZ, bx=l[i+2]*SX, by=l[i+3]*SZ, n=Math.max(1,Math.ceil(Math.hypot(bx-ax,by-ay)/3)); for(let k=0;k<=n;k++) padPts.push([ax+(bx-ax)*k/n, ay+(by-ay)*k/n]); } });
+  if(padPts.length){ const cell=new Map(), key=(x,y)=>Math.floor(x/10)+","+Math.floor(y/10); padPts.forEach(q=>{ const k=key(q[0],q[1]); (cell.get(k)||cell.set(k,[]).get(k)).push(q); });
+    const near=(x,y)=>{ const cx=Math.floor(x/10), cy=Math.floor(y/10); for(let i=-1;i<=1;i++) for(let j=-1;j<=1;j++){ const c=cell.get((cx+i)+","+(cy+j)); if(c && c.some(q=>Math.hypot(q[0]-x,q[1]-y)<7)) return true; } return false; };
+    TREES=TREES.filter(p=>!near(p[0]*SX,p[1]*SZ)); }
   BUSHES=scatter(maskOf(["scrub","meadow"]), SMALL?45:28, SMALL?2500:9000, 5);
   // losse struiken op de open hellingen, zodat lege stukken niet kaal ogen
   const taken=maskOf(["wood","scrub","meadow","farm","village","building","water","rock","dam"]);
@@ -323,6 +328,10 @@ function paintOverlay(){
   ox.save(); ox.strokeStyle=INK; ox.lineWidth=1.6; (V.layers.dam||[]).forEach(p=>{ polyPath(p,0,0); ox.stroke(); }); ox.restore();
   // wegen als zandkleurige linten met een inktrand, karrensporen gestippeld
   line("track", "rgba(150,104,62,0.75)", 2.4, {dash:[5,3.5], jit:0.8, phase:4});
+  // het pad van Trinta naar de quinta: een zonnige gloed met een oranje stippellijn
+  line("pad_quinta", "rgba(246,196,69,0.55)", 11, {jit:0.8, phase:4});
+  line("pad_quinta", "rgb(46,36,30)", 3.4, {alpha:0.85, jit:0.8, phase:4});
+  line("pad_quinta", "rgb(236,122,60)", 2.2, {dash:[6,4], jit:0.8, phase:4});
   line("path",  "rgba(46,36,30,0.7)", 1.8, {dash:[0.1,5]});
   line("minor", INK, 7.5, {alpha:0.85, jit:0.8, phase:6});
   line("minor", "rgb(240,228,198)", 4.6, {jit:0.8, phase:6});
@@ -874,6 +883,7 @@ function openPanel(state, silent){
     const s=c.spots[state.id], sp=SPOTS.find(x=>x.id===state.id), f=frac(sp.lat,sp.lon);
     eyebrow=sp.lat.toFixed(4)+"° N · "+Math.abs(sp.lon).toFixed(4)+"° W · "+Math.round(heightAt(f[0],f[1]))+" m";
     title=s.name; sub=s.sub; body="";
+    if(s.video) body+='<div class="film"><video controls playsinline preload="'+(s.poster?'none':'metadata')+'"'+(s.poster?' poster="'+esc(ROOT+s.poster)+'"':'')+' src="'+esc(ROOT+s.video)+'"></video></div>';
     if(s.fotos && s.fotos.length) body+='<div class="fotos">'+s.fotos.map((f,k)=>'<figure style="--r:'+(((k*53)%7)-3)*0.7+'deg" data-foto="'+k+'"><img src="'+esc(ROOT+f.src)+'" alt="'+esc(f.tekst)+'" loading="lazy" decoding="async"><figcaption>'+esc(f.tekst)+'</figcaption></figure>').join("")+'</div>';
     body+=s.tekst.map(t=>"<p>"+esc(t)+"</p>").join("");
     if(s.nog_schrijven) body+='<p class="note">'+esc(c.ui.todo)+'</p>';

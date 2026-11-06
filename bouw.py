@@ -185,9 +185,20 @@ def bouw_kaart(L):
                 waarschuwingen.append(f"{pt['_bestand']}: foto fotos/{b} bestaat niet")
                 continue
             fotos.append({"src": "fotos/" + foto_uit(b), "tekst": f.get(L) or f.get("nl") or ""})
+        video = foto_pad(pt.get("video"))
+        # voorbeeldplaatje van het filmpje: een foto met dezelfde naam ernaast (pad.mp4 -> pad.jpg)
+        poster = ""
+        if video:
+            stam = os.path.splitext(video)[0]
+            for ext in (".jpg", ".jpeg", ".png"):
+                if os.path.exists(os.path.join(HIER, "fotos", stam + ext)):
+                    poster = "fotos/" + foto_uit(stam + ext); break
+        if video and not os.path.exists(os.path.join(HIER, "fotos", video)):
+            waarschuwingen.append(f"{pt['_bestand']}: video fotos/{video} bestaat niet")
+            video = ""
         plekken[pt["id"]] = {"name": tekst.get("naam", ""), "sub": tekst.get("onder", ""),
                              "tekst": alineas(tekst.get("tekst")), "nog_schrijven": bool(tekst.get("nog_schrijven")),
-                             "fotos": fotos}
+                             "fotos": fotos, "video": ("fotos/" + video) if video else "", "poster": poster}
     data = {"titel": K["titel"], "ondertitel": K["ondertitel"], "teksten": K["teksten"],
             "plaatsnamen": K["plaatsnamen"], "plekken": plekken}
     teksten = K["teksten"]

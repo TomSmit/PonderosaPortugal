@@ -77,6 +77,10 @@ content:
         label: English
         type: object
         fields: *plektekst
+      - name: video
+        label: Filmpje
+        type: file
+        description: "Een kort filmpje (mp4), liefst kleiner dan 30 MB. Het staat boven de foto's."
       - name: fotos
         label: Foto's
         type: object
